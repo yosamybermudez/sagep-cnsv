@@ -1,0 +1,50 @@
+<div class="x_panel" id="comentarios-panel">
+    <div class="x_title">
+        <h2>Comentarios</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <ul class="list-group">
+            <li class="list-group-item" id="publicar-comentario-form">
+                <div class="row">
+                    <div class="col-xs-2 col-md-1">
+                        {% set trabajador = app.user.trabajadorAsociado %}
+                        <img src="
+                                {{ trabajador is null ? asset('images/avatar_default.png') : trabajador.foto is not null ? asset('assets/fotosTrabajadores/' ~ trabajador.foto) : trabajador.sexo == 'Femenino' ? asset('images/femenino.jpg') : asset('images/masculino.jpg') }}
+                                " width="100%" class="img-circle img-responsive" alt="" /></div>
+                    <div class="col-xs-10 col-md-11">
+
+                            <div class="comment-text">
+                                <textarea name="comentario" style="font-size: 12px;" type="text" class="form-control"></textarea>
+                            </div>
+                            <div class="action">
+                                <button type="button"  href="{{ path('comentario_nuevo', {'entidad' : entidad.nombre, 'id' : entidad.id }) }}" class="btn btn-xs btn-primary publicar-comentario">
+                                    Publicar
+                                </button>
+                            </div>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-group" id="comentarios-list">
+        {% if encuentro.comentarios is defined and encuentro.comentarios | length > 0 %}
+
+                {% for comentario in ((encuentro.comentarios | filter(comentario => comentario.comentarioPadre == null))| sort((a,b) => a.fechaModificado < b.fechaModificado)) %}
+                    {{ include('default/tpl-comentario-unico.html.twig', { 'comentario' : comentario }) }}
+                {% endfor %}
+
+        {% else %}
+            <div class="p-3" id="comentarios-list-no-elements">
+                <p>No hay comentarios registrados</p>
+            </div>
+        {% endif %}
+        </ul>
+    </div>
+</div>

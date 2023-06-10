@@ -1,0 +1,96 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ app.request.headers.get('referer') }}"><i class="fa fa-caret-left"></i> Volver a Página anterior</a></h5>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Búsqueda avanzada</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        {{ form_start(form) }}
+                       <div class="row">
+                           <div class="col-12">{{ form_row(form.entidad) }}</div>
+                           <div class="col-lg-6 col-12">{{ form_row(form.fechaInicio) }}</div>
+                           <div class="col-lg-6 col-12">{{ form_row(form.fechaFin) }}</div>
+                       </div>
+
+
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a class="btn btn-warning" href="{{ app.request.headers.get('referer') }}">Cancelar</a>
+                                <button type="submit" name="valider" class="btn btn-success">Buscar</button>
+                            </div>
+                        </div>
+                        {{ form_row(form._token) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                {% if result is defined %}
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Resultado de la búsqueda</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    {% set inicio = fechaInicio is defined and fechaInicio is not null ? fechaInicio | date('Ymd') : null %}
+                                    {% set fin = fechaFin is defined and fechaFin is not null ? fechaFin | date('Ymd') : null %}
+                                    {% if (inicio is null) and (fin is not null) %} {% set params = { 'fin' : fin } %}
+                                    {% elseif (fin is null) and (inicio is not null) %} {% set params = { 'inicio' : inicio } %}
+                                    {% elseif (fin is not null) and (inicio is not null) and (inicio != fin ) %} {% set params = { 'inicio' : inicio, 'fin' : fin } %}
+                                    {% elseif (fin is not null) and (inicio is not null) and (inicio == fin ) %} {% set params = { 'fecha' : inicio } %}
+                                    {% else %}
+                                        {% set params = {  } %}
+                                    {% endif %}
+
+                                    <a href="
+                                    {% if entidad == 'Encuentro'%}
+                                        {{ path('app_busqueda_avanzada_exportar', params | merge({ 'formato' : 'excel', 'entidad' : 'encuentro'})) }}
+                                    {% elseif entidad == 'EncuentroAcuerdo' %}
+                                        {{ path('app_busqueda_avanzada_exportar', params | merge({ 'formato' : 'excel', 'entidad' : 'acuerdo'})) }}
+                                    {% else %}
+
+                                    {% endif %}
+                                    " class="btn btn-sm btn-outline-success">
+                                            <img width="20px" src="{{ asset('images/filetypes/xls.png') }}">
+                                        </a>
+                                </li>
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            {% if entidad == 'Encuentro'%}
+                                {% set encuentros = result %}
+                                {{ include('busqueda_avanzada/tabla_encuentro.html.twig') }}
+                            {% elseif entidad == 'EncuentroAcuerdo' %}
+                                {% set acuerdos = result %}
+                                {{ include('busqueda_avanzada/tabla_acuerdo.html.twig') }}
+                            {% else %}
+                                No hay nada que mostrar
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

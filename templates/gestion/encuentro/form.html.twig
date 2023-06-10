@@ -1,0 +1,142 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('encuentro_listar') }}"><i class="fa fa-caret-left"></i> Volver a Lista de encuentros</a></h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Registrar encuentro</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col-lg-3 col-12">{{ form_row(form.refEvento) }}</div>
+                            <div class="col-lg-6 col-12">{{ form_row(form.nombre) }}</div>
+                            <div class="col-lg-3 col-12">{{ form_row(form.estado) }}</div>
+
+                            <div class="col-lg-3 col-12">{{ form_row(form.tipoEncuentro) }}</div>
+                            <div class="col-lg-3 col-6">{{ form_row(form.fechaEvento) }}</div>
+                            <div class="col-lg-3 col-6">{{ form_row(form.hora) }}</div>
+                            <div class="col-lg-3 col-12">{{ form_row(form.horaFin) }}</div>
+
+                            <div class="col-lg-6 col-12">{{ form_row(form.lugar) }}</div>
+                            <div class="col-lg-3 col-12">{{ form_row(form.dirigeEncuentro) }}</div>
+                            <div class="col-lg-3 col-12">{{ form_row(form.cantidadTrabajadores) }}</div>
+
+                            <div class="col-lg-12 col-12">{{ form_row(form.descripcion) }}</div>
+
+                            <div class="col-lg-6 col-12">{{ form_row(form.comentario) }}</div>
+                            <div class="col-lg-6 col-12">{{ form_row(form.fileDocumento) }}</div>
+
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Participantes</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <table id="example" class="display table table-striped table-bordered dataminetables">
+                                    <thead>
+                                    <th><input type="checkbox" id="select_all" name="select_all"></th>
+                                    <th>Nombre(s) y Apellidos</th>
+                                    <th>Cargo</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for trabajador in trabajadores | filter(trabajador => trabajador.alta == true) %}
+                                        <tr>
+                                            <td><input {% if encuentro is defined and trabajador in encuentro.participantes %}checked="checked"{% endif %} type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ trabajador.id }}"></td>
+                                            <td>{{ trabajador.nombreCompleto }}</td>
+                                            <td>{{ trabajador.cargo.nombre }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Invitados</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <table class="display table table-striped table-bordered" id="table-invitados">
+                                    <thead>
+                                        <th>
+                                            <label for="invitado_nombre">Nombre(s) y apellidos</label>
+                                            <input class="form-control form-control-sm" id="invitado_nombre" name="invitado_nombre">
+                                        </th>
+                                        <th>
+                                            <label for="invitado_nombre">Cargo</label>
+                                            <input class="form-control form-control-sm" id="invitado_cargo" name="invitado_cargo">
+                                        </th>
+                                        <th>
+                                            <label for="invitado_nombre">Entidad</label>
+                                            <input class="form-control form-control-sm" id="invitado_entidad" name="invitado_entidad">
+                                        </th>
+                                        <th>
+                                            <button id="agregar-invitado" type="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> </button>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        {% if encuentro.invitados is defined and encuentro.invitados | length > 0 %}
+                                            {% for invitado in encuentro.invitados %}
+                                            <tr>
+                                                <td>{{ invitado['nombre'] }}</td>
+                                                <td>{{ invitado['cargo'] }}</td>
+                                                <td>{{ invitado['entidad'] }}</td>
+                                                <td>
+                                                    <input type="hidden" name="invitado[]" value="{{ invitado['nombre'] }}-{{ invitado['cargo'] }}-{{ invitado['entidad'] }}">
+                                                    <button class="quitar-invitado btn btn-danger btn-sm" type="button"><span class="fa fa-remove"></span></button>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a class="btn btn-sm btn-warning" href="{{ path('encuentro_listar') }}">Cancelar</a>
+                                <button type="submit" name="valider" class="btn btn-sm btn-success">Registrar</button>
+                            </div>
+                        </div>
+                        {{ form_row(form._token) }}
+                        {{ form_end(form, {'render_rest' : false}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,82 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('solicitud_materiales_listar') }}"><i class="fa fa-caret-left"></i> Volver a Lista de acuerdos</a></h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel x_panel_cnsv">
+                    <div class="x_title">
+                        <h2>Solicitud de materiales: {{ solicitud.nroSolicitud }}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a href="{{ path('solicitud_materiales_exportar_word') }}" class="btn text-white btn-secondary">AÑADIR ACUERDO</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('solicitud_materiales_editar', { 'id' : solicitud.id }) }}" class="btn text-white btn-primary">EDITAR</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('solicitud_materiales_nuevo') }}" class="btn text-white btn-secondary">AÑADIR ACUERDO</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-lg-2 col-12"><b>Organismo: </b> {{ solicitud.organismo }}</div>
+                                <div class="col-lg-6 col-12">{{ solicitud.empresa }}</div>
+                                <div class="col-lg-2 col-12">{{ solicitud.unidad }}</div>
+                                <div class="col-lg-2 col-12">{{ solicitud.codigoUnidad }}</div>
+
+                                <div class="col-lg-12 col-12">{{ solicitud.almacen }}</div>
+
+                                <div class="col-lg-3 col-12">{{ solicitud.nroOrden }}</div>
+                                <div class="col-lg-6 col-12">{{ solicitud.centroCosto }}</div>
+                                <div class="col-lg-3 col-12">{{ solicitud.codigoCentroCosto }}</div>
+
+                                <div class="col-lg-3 col-12">{{ solicitud.nroLote }}</div>
+                                <div class="col-lg-3 col-12">{{ solicitud.producto }}</div>
+                                <div class="col-lg-6 col-12">{{ solicitud.otros }}</div>
+
+                                <div class="col-lg-6 col-1 p-0">
+                                    <div class="col-lg-12 col-12">{{ solicitud.solicitadoPorNombreCompleto }}</div>
+                                    <div class="col-lg-12 col-12">{{ solicitud.solicitadoPorCargo }}</div>
+                                    <div class="col-lg-12 col-12">{{ solicitud.solicitadoPorFecha | date('d-m-Y') }}</div>
+                                </div>
+                                <div class="col-lg-6 col-12 p-0">
+                                    <div class="col-lg-12 col-12">{{ solicitud.recibidoPorNombreCompleto }}</div>
+                                    <div class="col-lg-12 col-12">{{ solicitud.recibidoPorCargo }}</div>
+                                    <div class="col-lg-12 col-12">{{ solicitud.recibidoPorFecha | date('d-m-Y') }}</div>#}
+                                </div>
+
+                                <div class="col-lg-4 col-12">{{ solicitud.nroSolicitud }}</div>
+                                <div class="col-lg-4 col-12">{{ solicitud.valeEntrega }}</div>
+{#                                <div class="col-lg-4 col-12">{{ solicitud.fileDocumento }}</div>#}
+
+{#                                <div class="col-lg-12 col-12">{{ solicitud.comentario }}</div>#}
+                               <div class="col-lg-12 col-12">
+                                   {% for solicitudMP in solicitud.solicitudesMaterialesProductos %}
+                                    <li>{{ solicitudMP.producto.descripcion }}</li>
+                                   {% endfor %}
+                               </div>
+                            </div>
+                            <div class="ln_solid m-3"></div>
+                       </div>
+                    </div>
+                </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

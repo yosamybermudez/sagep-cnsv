@@ -1,0 +1,22 @@
+<li><a href="{{ path('app_index') }}"><i class="fa fa-home"></i> Inicio</a></li>
+{% for elem in main_menu %}
+    {% if elem.mostrar is defined and elem.mostrar == true %}
+    <li><a><i class="fa fa-{{ elem.icono }}"></i> {{ elem.nombre }} <span class="fa fa-chevron-down"></span></a>
+        {% if elem.rutas is defined and elem.rutas|length > 0 %}
+            <ul class="nav child_menu">
+                {% for submenu in elem.rutas %}
+                    {% if submenu.mostrar is defined and submenu.mostrar == true %}
+                    <li>
+                        <a href="{{ submenu.enlace is defined and submenu.enlace != '' ? submenu.enlace : '#' }}">{{ submenu.nombre }}
+                            {% if submenu.icono is defined and submenu.icono != '' %}
+                                <span class="fa fa-{{ submenu.icono }}"></span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            </li>
+        {% endif %}
+    {% endif %}
+{% endfor %}

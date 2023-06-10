@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}SAGEP - CNSV{% endblock %}</title>
+        {% block metas %}
+            <meta charset="UTF-8">
+        {% endblock %}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body {% block bodyclass %}class="" {% endblock %}>
+
+        {% block impersionate %}
+            {% if is_granted('IS_IMPERSONATOR') %}
+            <div class="alert alert-warning" style="margin-bottom: 0;">
+                Está autenticado como : {{ app.user.username }}
+                <a href="{{ path('app_admin_index',{'_switch_user':'_exit'}) }}">Dejando la suplantación</a>
+            </div>
+            {% endif %}
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

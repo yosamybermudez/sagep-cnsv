@@ -1,0 +1,53 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Roles
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							Lista de roles</h2>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th>No.</th>
+									{% if is_granted('ROLE_ADMINISTRADOR_SISTEMA') %}
+									<th>Identificador</th>
+									{% endif %}
+									<th>Nombre</th>
+									<th>Descripción</th>
+								</thead>
+								<tbody>
+									{% for rol in roles  %}
+										<tr>
+											<td>{{ loop.index }}</td>
+											<td>{{ rol.nombre }}</td>
+											{% if is_granted('ROLE_ADMINISTRADOR_SISTEMA') %}
+											<td>{{ rol.identificador }}</td>
+											{% endif %}
+											<td>{{ rol.descripcion }}</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,175 @@
+
+
+
+/* Colores */
+
+.bg-instucional-verde{
+  background-color: #009236;
+}
+
+.text-instucional-verde{
+  color: #009236;
+}
+
+
+/* Login */
+.login{
+  background-color: #73879C;
+}
+
+.login *{
+  color: #fff;
+  text-shadow: none;
+}
+
+.login_content h1 {
+  margin: 10px 0;
+}
+
+.login_content h5{
+  margin: 10px 0 30px 0;
+}
+
+/* System */
+.nav_title{
+  background-color: #EDEDED;
+}
+
+.nav_title span{
+  color: #5A738E;
+  font-weight: bold;
+}
+
+.nav_title img{
+  width: 45px;
+}
+
+label.required:after{
+  content: ' *';
+  color: red;
+}
+
+div.x_panel_cnsv div.x_content label{
+  font-weight: bold;
+}
+
+.btn i, .btn span{
+  color: #fff!important;
+}
+
+div.x_panel table * {
+  color: #73879C;
+}
+
+
+
+ul#comentarios-list li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+/*ul#comentarios-list li.list-group-item:hover { background-color: rgba(86,61,124,.1); }*/
+ul#comentarios-list .mic-info { color: #666666;font-size: 11px; }
+ul#comentarios-list .action { margin-top:5px; }
+#comentarios-panel .action { margin-top:5px; }
+ul#comentarios-list .comment-text { font-size: 12px; }
+ul#comentarios-list .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+
+
+.panel_toolbox > li > a:hover {
+  color: #0062cc;
+}
+
+table ul{
+  padding-left: 10px;
+  margin: 0;
+}
+
+.btn-xs{
+  padding: .1rem .4rem;
+  font-size: .800rem;
+  line-height: 1.5;
+}
+
+td.opciones{
+  white-space: nowrap;
+}
+
+li#top-bar-notificaciones{
+  position: relative;
+  top: 6px;
+}
+
+li#top-bar-busqueda-avanzada{
+  padding: 0 10px;
+  position: relative;
+  top: 6px;
+}
+
+table.table tr > td > ul{
+  padding-left: 20px;
+}
+
+table.table td div.form-group,
+table.table td div.form-group *{
+  margin: 0;
+}
+
+.alert .ui-pnotify-icon{
+  position: relative;
+  top: 6px;
+}
+
+span.invalid-feedback.d-block{
+  position: absolute;
+  z-index: 1000;
+  top: 52px;
+}
+
+.panel_toolbox>li>a{
+  color: white;
+}
+
+.login_wrapper_2 {
+  right: 0px;
+  margin: 0px auto;
+  max-width: 400px;
+  position: relative;
+}
+
+form[name="change_pwsd_form"] legend{
+  display: none;
+}
+
+span.invalid-feedback.d-block{
+  float: right;
+  position: initial;
+}
+
+/** Panel */
+.x_panel .x_title{
+  overflow: hidden;
+}
+
+/** Alerts Override */
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+/****/

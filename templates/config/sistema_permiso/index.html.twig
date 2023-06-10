@@ -1,0 +1,64 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Permisos
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							Permisos por roles</h2>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th>No.</th>
+									<th>Entidad</th>
+									{% for rol in roles | filter (rol => rol.identificador != "ROLE_ADMINISTRADOR_SISTEMA") %}
+										<th data-sortable="false">{{ rol.nombre }}</th>
+									{% endfor %}
+								</thead>
+								<tbody>
+									{% for entidad in sistema_entidades  %}
+										<tr>
+											<td>{{ loop.index }}</td>
+											<td>{{entidad.nombre }}</td>
+											{% for rol in roles | filter (rol => rol.identificador != "ROLE_ADMINISTRADOR_SISTEMA") %}
+												<td>
+													<button title="Agregar" href="{{ path('app_config_permiso_cambiar', {'entidad' : entidad.id, 'rol' : rol.id, 'funcionalidad' : 'agregar'}) }}" class="cambiar-permiso btn btn-sm {{ permisos[entidad.id][rol.id] is defined and permisos[entidad.id][rol.id]["agregar"] == true ? 'btn-success' : 'btn-warning' }}"><i class="fa fa-plus"></i></button>
+													<button title="Leer" href="{{ path('app_config_permiso_cambiar', {'entidad' : entidad.id, 'rol' : rol.id, 'funcionalidad' : 'leer'}) }}" class="cambiar-permiso btn btn-sm {{ permisos[entidad.id][rol.id] is defined and permisos[entidad.id][rol.id]["leer"] == true ? 'btn-success' : 'btn-warning' }}"><i class="fa fa-eye"></i></button>
+													<button title="Modificar" href="{{ path('app_config_permiso_cambiar', {'entidad' : entidad.id, 'rol' : rol.id, 'funcionalidad' : 'modificar'}) }}" class="cambiar-permiso btn btn-sm {{ permisos[entidad.id][rol.id] is defined and permisos[entidad.id][rol.id]["modificar"] == true ? 'btn-success' : 'btn-warning' }}"><i class="fa fa-pencil"></i></button>
+													<button title="Eliminar" href="{{ path('app_config_permiso_cambiar', {'entidad' : entidad.id, 'rol' : rol.id, 'funcionalidad' : 'eliminar'}) }}" class="cambiar-permiso btn btn-sm {{ permisos[entidad.id][rol.id] is defined and permisos[entidad.id][rol.id]["eliminar"] == true ? 'btn-success' : 'btn-warning' }}"><i class="fa fa-trash"></i></button>
+													{% set clase_todos = '' %}
+													{% set permisos_all = (permisos[entidad.id][rol.id] is defined and permisos[entidad.id][rol.id]) ? permisos[entidad.id][rol.id] : null %}
+													{% if permisos_all is not null and permisos_all['agregar'] and permisos_all['leer'] and permisos_all['modificar'] and permisos_all['eliminar'] %}
+														{% set clase_todos = 'success' %}
+													{% elseif permisos_all is not null and not permisos_all['agregar'] and not permisos_all['leer'] and not permisos_all['modificar'] and not permisos_all['eliminar'] %}
+														{% set clase_todos = 'warning' %}
+													{% endif %}
+{#													<button href="{{ path('app_config_permiso_cambiar', {'entidad' : entidad.id, 'rol' : rol.id, 'funcionalidad' : 'todos'}) }}" class="cambiar-permiso btn btn-sm {{ clase_todos}}}"><i class="fa fa-trash"></i></button>#}
+												</td>
+											{% endfor %}
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

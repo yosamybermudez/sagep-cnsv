@@ -1,0 +1,75 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Municipios
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							Lista de municipios</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{ path('municipio_nuevo') }}" class="btn text-white btn-primary">AÑADIR</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<form action="{{ path('municipio_accion_grupal') }}" id="grpaction" method="post" name="grpaction">
+								<div class="form-group form-inline">
+									<select class="form-control" name="action" required id="action_select">
+										<option value="">
+											Acción de grupo</option>
+										<option value="Eliminar">
+											Eliminar</option>
+									</select>
+									<button class="btn btn-primary" type="submit"><span class="fa fa-arrow-right"></span> </button>
+								</div>
+
+							</form>
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th><input type="checkbox" id="select_all" name="select_all"></th>
+									<th>Código</th>
+									<th>Nombre</th>
+									<th>Provincia</th>
+									<th data-sortable="false">Opciones</th>
+								</thead>
+								<tbody>
+									{% for municipio in municipios %}
+										<tr>
+											<td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ municipio.id }}"></td>
+											<td>{{ municipio.id }}</td>
+											<td>{{ municipio.nombre }}</td>
+											<td>{{ municipio.provincia.nombre }}</td>
+											<td>
+												<a class="btn btn-sm btn-primary" href="{{ path('municipio_editar',{"id": municipio.id}) }}">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="{{ path('municipio_eliminar', {'id': municipio.id}) }}" class="btn btn-sm btn-danger disable-btn del-link">
+													<i class="fa fa-trash"></i>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

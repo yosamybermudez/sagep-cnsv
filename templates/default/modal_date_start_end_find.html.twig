@@ -1,0 +1,42 @@
+<div class="nav-item pl-2" role="presentation">
+    <form id="find-start-end-date-form" method="post" {% if action is defined %} action="{{ action }}">{% endif %}
+        <div class="form-inline">
+            <div style="margin: 0;">
+                <select class="mr-2 form-control form-control-sm pull-left" name="filtro">
+                    <option value="Fecha de registro">Fecha de registro</option>
+                    <option value="Fecha de cumplimiento">Fecha de cumplimiento</option>
+                </select>
+            </div>
+            <div style="margin: 0;">
+                <input type="date" class="mr-2 form-control form-control-sm pull-left" name="fecha_inicio" placeholder="Fecha de inicio">
+            </div>
+            <div style="margin: 0;">
+                <input type="date" class="mr-2 form-control form-control-sm pull-left" name="fecha_fin" placeholder="Fecha de fin">
+            </div>
+            <button id="find-start-end-date" name="submit" class="btn btn-info btn-sm pull-left form-control" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            <a class="btn btn-primary btn-sm pull-left form-control text-white" {% if action is defined %} href="{{ action }}" {% endif %}><span class="glyphicon glyphicon-th"></span> Mostrar todos</a>
+            {% if elem is defined and title is defined %}
+                <a type="button" class="btn btn-secondary btn-sm pull-left form-control" data-toggle="modal" href="#chartModal"><img class="svg svg-invert" src="/sitec/public/assets/zondicons/chart-pie.svg" style="height: 100%; margin-right: 0px;"></a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+<div id="chartModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">{{ title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div style="width:40%;margin: 0px auto;">
+                {{ render_chart(chart) }}
+            </div>
+            <div class="modal-footer">
+                <p class="mr-3">Total: {{ total }}</p>
+                <button type="button" class="btn btn-sm btn-primary waves-effect waves-light" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>

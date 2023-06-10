@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceso Denegado
+{% endblock %}
+{% block stylesheets %}
+    <meta
+            http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta
+            name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/ico" />
+
+    <!-- Bootstrap -->
+    <link
+            href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link
+            href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link
+            href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- Animate -->
+    <link
+            href="{{ asset('vendors/animate.css/animate.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link
+            href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
+    <!-- Personalized Theme Style -->
+    <link href="{{ asset('build/css/personalized.css') }}" rel="stylesheet">
+{% endblock %}
+{% block bodyclass %}class="login"
+{% endblock %}
+{% block body %}
+    <div>
+        <div>
+            <a class="hiddenanchor" id="signup"></a>
+            <a class="hiddenanchor" id="signin"></a>
+            <div class="login_wrapper" style="background-color: #f6f6f6; padding: 30px 70px; max-width: 600px; border-radius: 40px; box-shadow: 10px 10px 50px #000;">
+                <h1 class="text-black-50 text-center">¡Error!</h1>
+                <img class="w-100" src="{{ asset('images/error2.png') }}">
+                <section>
+                    <h3 class="text-black-50 text-center">{{ mensaje }}</h3>
+
+                    <p class="text-black-50 text-center">{{ code }}</p>
+                        {% if 'ROLE_ADMINISTRADOR_SISTEMA' in app.user.roles %}
+                    <p class="text-black-50 text-center" style="word-break: break-all;">{{ detalle }}</p>
+                    {% endif %}
+
+                    <div>
+                        <a class="btn btn-primary" style="margin: 0px auto;" href="{{ app.request.headers.get('referer') }}"><i class="fa fa-arrow-left"></i> Volver</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}

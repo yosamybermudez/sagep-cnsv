@@ -1,0 +1,94 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Usuarios
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							Lista de usuarios</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{ path('usuario_nuevo') }}" class="btn text-white btn-primary">AÑADIR</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<form action="{{ path('usuario_accion_grupal') }}" id="grpaction" method="post" name="grpaction">
+								<div class="form-group form-inline">
+									<select class="form-control" name="action" required id="action_select">
+										<option value="">
+											Acción de grupo</option>
+										<option value="Desactivar">
+											Desctivar</option>
+										<option value="Activar">
+											Activar</option>
+										<option value="Eliminar">
+											Eliminar</option>
+									</select>
+									<button class="btn btn-primary" type="submit"><span class="fa fa-arrow-right"></span> </button>
+								</div>
+
+							</form>
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th><input type="checkbox" id="select_all" name="select_all"></th>
+									<th>Usuario</th>
+									<th>Correo electrónico</th>
+									<th>Nombre completo</th>
+									<th data-sortable="false">Opciones</th>
+								</thead>
+								<tbody>
+									{% for user in usuarios|filter(user => not user.deleted)  %}
+										<tr>
+											<td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ user.id }}"></td>
+											<td>{{ user.username }}</td>
+											<td>{{ user.email }}</td>
+											<td>{{ user.nombreCompleto }}</td>
+											<td>
+
+												<a title="Mostrar datos" class="btn btn-sm btn-secondary" href="{{ path('usuario_mostrar',{"id":user.id}) }}">
+													<i class="fa fa-eye"></i>
+												</a>
+												<a title="Editar datos" class="btn btn-sm btn-primary" href="{{ path('usuario_editar',{"id":user.id}) }}">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a title="Eliminar" class="btn btn-sm btn-danger" href="{{ path('usuario_eliminar', {'id': user.id}) }}">
+													<i class="fa fa-trash"></i>
+												</a>
+												{% if 'ROLE_ADMINISTRADOR_SISTEMA' not in user.roles %}
+													{%  if user.valid %}
+														<a title="Activar" class="btn btn-sm btn-success activate-link" href="{{ path('usuario_cambiar_estado', {'id': user.id}) }}">
+															<i class="fa fa-check"></i>
+														</a>
+													{% else %}
+														<a title="Desactivar" class="btn btn-sm btn-warning activate-link" href="{{ path('usuario_cambiar_estado', {'id': user.id}) }}">
+															<i class="fa fa-times"></i>
+														</a>
+													{% endif %}
+												{% endif %}
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

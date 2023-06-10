@@ -1,0 +1,46 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('encuentro_listar') }}"><i class="fa fa-caret-left"></i> Volver a Lista de encuentros</a></h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Cambiar contraseña</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+
+                </li>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="col-6">
+                <div class="animate form">
+                    <section>
+                        {{ form_start(form) }}
+                        {{ form_row(form) }}
+                        <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                        {{ form_end(form) }}
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        </div>
+    </div>
+{% endblock %}
+

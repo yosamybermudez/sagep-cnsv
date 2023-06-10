@@ -1,0 +1,398 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('solicitud_materiales_listar') }}"><i class="fa fa-caret-left"></i> Volver a Lista de acuerdos</a></h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel x_panel_cnsv">
+                    <div class="x_title">
+                        <h2>Solicitud de materiales: {{ solicitud.nroSolicitud }}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a href="{{ path('solicitud_materiales_exportar_word', { 'id' : solicitud.id }) }}" class="btn text-white btn-success">EXPORTAR</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('solicitud_materiales_editar', { 'id' : solicitud.id }) }}" class="btn text-white btn-primary">EDITAR</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('solicitud_materiales_nuevo') }}" class="btn text-white btn-secondary">AÑADIR ACUERDO</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class=WordSection1 style="margin: 0px auto;">
+
+                                <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=754
+                                       style='width:565.65pt;margin-left:0pt;border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:1184;
+ mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+                                    <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+                                        <td width=280 colspan=9 valign=top style='width:210.25pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>ORGANISMO:<span
+                                                            style='mso-spacerun:yes'>   </span></b><span class=datosCar>{{ solicitud.organismo }}</span><b
+                                                        style='mso-bidi-font-weight:normal'><o:p></o:p></b></p>
+                                        </td>
+                                        <td width=474 colspan=8 rowspan=3 style='width:355.4pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'><span
+                                                            style='font-size:16.0pt'>SOLICITUD DE MATERIALES<o:p></o:p></span></b></p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:1'>
+                                        <td width=280 colspan=9 valign=top style='width:210.25pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>EMPRESA:<span style='mso-spacerun:yes'> 
+  </span></b><span class=datosCar>{{ solicitud.empresa | upper }}</span><b style='mso-bidi-font-weight:
+  normal'><o:p></o:p></b></p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:2'>
+                                        <td width=151 colspan=4 valign=top style='width:113.0pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>UNIDAD:</b> <span class=datosCar>{{ solicitud.unidad }}</span><b
+                                                        style='mso-bidi-font-weight:normal'><o:p></o:p></b></p>
+                                        </td>
+                                        <td width=130 colspan=5 valign=top style='width:97.25pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>CÓDIGO:</b><span class=datosCar>{{ solicitud.codigoUnidad }}</span><b
+                                                        style='mso-bidi-font-weight:normal'><o:p></o:p></b></p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:3'>
+                                        <td width=754 colspan=17 valign=top style='width:565.65pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>ALMACÉN AL QUE LE SOLICITA:<span
+                                                            style='mso-spacerun:yes'>  </span></b><span class=datosCar>{{ solicitud.almacen }}</span><b
+                                                        style='mso-bidi-font-weight:normal'><o:p></o:p></b></p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:4'>
+                                        <td width=76 rowspan=2 style='width:56.85pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>DESTINO<o:p></o:p></b></p>
+                                        </td>
+                                        <td width=130 colspan=6 valign=top style='width:97.35pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>ORDEN <span class=SpellE>Nº</span>.<o:p></o:p></b></p>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><o:p>{{ solicitud.nroOrden }}</o:p></p>
+                                        </td>
+                                        <td width=399 colspan=9 valign=top style='width:299.45pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>CENTRO DE COSTO:<o:p></o:p></b></p>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'><span style='mso-spacerun:yes'> </span></b><span
+                                                        class=datosCar>{{ solicitud.centroCosto }}</span>
+                                                <b style='mso-bidi-font-weight:normal'><o:p></o:p></b></p>
+                                        </td>
+                                        <td width=149 valign=top style='width:112.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
+                                                        class=GramE><b style='mso-bidi-font-weight:normal'>CÓDIGO :</b></span><b
+                                                        style='mso-bidi-font-weight:normal'> <o:p></o:p></b></p>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><span class=datosCar>{{ solicitud.codigoCentroCosto }}</span><b style='mso-bidi-font-weight:
+  normal'><o:p></o:p></b></p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:5'>
+                                        <td width=130 colspan=6 valign=top style='width:97.35pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>LOTE Nº.</b><o:p>{{ solicitud.nroLote }}</o:p></p>
+                                        </td>
+                                        <td width=159 colspan=4 valign=top style='width:119.2pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>PRODUCTO</b><o:p>{{ solicitud.producto }}</o:p></p>
+                                        </td>
+                                        <td width=390 colspan=6 valign=top style='width:292.25pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>OTROS </b><o:p>{{ solicitud.otros }}</o:p></p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:6'>
+                                        <td width=87 colspan=2 valign=top style='width:65.05pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>CÓDIGO<o:p></o:p></b></p>
+                                        </td>
+                                        <td width=341 colspan=12 valign=top style='width:256.1pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>DESCRIPCIÓN<o:p></o:p></b></p>
+                                        </td>
+                                        <td width=167 valign=top style='width:125.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>UM<o:p></o:p></b></p>
+                                        </td>
+                                        <td width=159 colspan=2 valign=top style='width:119.1pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>CANTIDAD<o:p></o:p></b></p>
+                                        </td>
+                                    </tr>
+                                    {% for s in solicitud.solicitudesMaterialesProductos %}
+                                        <tr style='mso-yfti-irow:7'>
+                                            <td width=87 colspan=2 valign=top style='width:65.05pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+                                                <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'>
+                                                            <o:p>{{ s.producto.codigo }}</o:p></p>
+                                            </td>
+                                            <td width=341 colspan=12 valign=top style='width:256.1pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                                <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><o:p>{{ s.producto.descripcion }}</o:p></p>
+                                            </td>
+                                            <td width=167 valign=top style='width:125.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                                <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><o:p>{{ s.producto.unidadMedida }}</o:p></p>
+                                            </td>
+                                            <td width=159 colspan=2 valign=top style='width:119.1pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                                <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><o:p>{{ s.cantidad }}</o:p></p>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr style='mso-yfti-irow:9'>
+                                        <td width=218 colspan=8 valign=top style='width:163.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>SOLICITADO POR: <o:p></o:p></b></p>
+                                            <p class=datos>{{ solicitud.solicitadoPorCargo }}</p>
+                                        </td>
+                                        <td width=210 colspan=6 valign=top style='width:157.55pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>RECIBIDO <span class=GramE>POR :</span><o:p></o:p></b></p>
+                                            <p class=datos>-----------</p>
+                                        </td>
+                                        <td width=167 rowspan=4 valign=top style='width:125.4pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>SOLICITUD <span class=SpellE>Nº</span>.</b></p><p>{{ solicitud.nroSolicitud }}</p>
+                                        </td>
+                                        <td width=159 colspan=2 rowspan=4 valign=top style='width:119.1pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>VALE DE ENTREGA<o:p></o:p></b></p><p>{{ solicitud.valeEntrega }}</p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:10'>
+                                        <td width=218 colspan=8 valign=top style='width:163.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>NOMBRE Y APELLIDOS: <o:p></o:p></b></p>
+                                            <p class=datos>{{ solicitud.solicitadoPorNombreCompleto }}</p>
+                                        </td>
+                                        <td width=210 colspan=6 valign=top style='width:157.55pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>NOMBRE Y APELLIDOS:<o:p></o:p></b></p>
+                                            <p class=datos>-----------</p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:11;height:17.0pt'>
+                                        <td width=131 colspan=3 rowspan=2 valign=top style='width:98.2pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:17.0pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>FIRMA <o:p></o:p></b></p>
+                                        </td>
+                                        <td width=28 colspan=2 style='width:21.35pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.0pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>D</b></p>
+                                        </td>
+                                        <td width=30 style='width:22.7pt;border-top:none;border-left:none;border-bottom:
+  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:
+  solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.0pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>M<o:p></o:p></b></p>
+                                        </td>
+                                        <td width=28 colspan=2 style='width:21.35pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.0pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>A<o:p></o:p></b></p>
+                                        </td>
+                                        <td width=121 colspan=2 rowspan=2 valign=top style='width:90.85pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.0pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'>FIRMA <o:p></o:p></b></p>
+                                        </td>
+                                        <td width=29 colspan=2 style='width:21.55pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.0pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>D<o:p></o:p></b></p>
+                                        </td>
+                                        <td width=31 style='width:23.6pt;border-top:none;border-left:none;border-bottom:
+  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:
+  solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.0pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>M<o:p></o:p></b></p>
+                                        </td>
+                                        <td width=29 style='width:21.55pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.0pt'>
+                                            <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
+  line-height:normal'><b style='mso-bidi-font-weight:normal'>A<o:p></o:p></b></p>
+                                        </td>
+                                    </tr>
+                                    <tr style='mso-yfti-irow:12;mso-yfti-lastrow:yes'>
+                                        <td width=28 colspan=2 valign=top style='width:21.35pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><o:p>{{ solicitud.solicitadoPorFecha | date('d') }}</o:p></p>
+                                        </td>
+                                        <td width=30 valign=top style='width:22.7pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><o:p>{{ solicitud.solicitadoPorFecha | date('m') }}</o:p></p>
+                                        </td>
+                                        <td width=28 colspan=2 valign=top style='width:21.35pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><o:p>{{ solicitud.solicitadoPorFecha | date('Y') }}</o:p></p>
+                                        </td>
+                                        <td width=29 colspan=2 valign=top style='width:21.55pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt;font-family:
+  "Arial",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
+                                        </td>
+                                        <td width=31 valign=top style='width:23.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt;font-family:
+  "Arial",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
+                                        </td>
+                                        <td width=29 valign=top style='width:21.55pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+                                            <p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><b
+                                                        style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt;font-family:
+  "Arial",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
+                                        </td>
+                                    </tr>
+                                    <![if !supportMisalignedColumns]>
+                                    <tr height=0>
+                                        <td width=76 style='border:none'></td>
+                                        <td width=11 style='border:none'></td>
+                                        <td width=44 style='border:none'></td>
+                                        <td width=20 style='border:none'></td>
+                                        <td width=9 style='border:none'></td>
+                                        <td width=30 style='border:none'></td>
+                                        <td width=16 style='border:none'></td>
+                                        <td width=13 style='border:none'></td>
+                                        <td width=62 style='border:none'></td>
+                                        <td width=59 style='border:none'></td>
+                                        <td width=25 style='border:none'></td>
+                                        <td width=3 style='border:none'></td>
+                                        <td width=31 style='border:none'></td>
+                                        <td width=29 style='border:none'></td>
+                                        <td width=167 style='border:none'></td>
+                                        <td width=9 style='border:none'></td>
+                                        <td width=149 style='border:none'></td>
+                                    </tr>
+                                    <![endif]>
+                                </table>
+
+                                <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
+
+                            </div>
+
+                       </div>
+                    </div>
+                </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

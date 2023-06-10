@@ -1,0 +1,54 @@
+security:
+    encoders:
+        App\Entity\Usuario:
+            algorithm: auto
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Usuario
+                property: username
+    role_hierarchy:
+        ROLE_ADMINISTRADOR_SISTEMA: [ROLE_ADMINISTRADOR_NEGOCIO]
+        ROLE_ADMINISTRADOR_NEGOCIO: [ROLE_DIRECTOR_AREA]
+        ROLE_DIRECTOR_AREA: [ROLE_ESPECIALISTA_PRINCIPAL]
+        ROLE_ESPECIALISTA_PRINCIPAL: [ROLE_ESPECIALISTA]
+        ROLE_ESPECIALISTA: [ROLE_USUARIO_ESTANDAR]
+    firewalls:
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#            anonymous: ~
+        main:
+            pattern: ^/
+            user_checker: App\Security\UserChecker
+            anonymous: ~
+            lazy: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                target: app_login
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 2592000
+            switch_user: true
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+#        - { path: ^/(%app_locales%)/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/(%app_locales%)/admin, roles: ROLE_ADMIN}
+        - { path: ^/admin, roles: ROLE_ADMINISTRADOR_NEGOCIO }
+        - { path: ^/*, roles: IS_AUTHENTICATED_FULLY }
+        # - { path: ^/profile, roles: ROLE_USER }

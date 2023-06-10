@@ -1,0 +1,357 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('encuentro_listar') }}"><i class="fa fa-caret-left"></i> Volver a Lista de encuentros</a></h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel x_panel_cnsv">
+                    <div class="x_title">
+                        <h2>Encuentro: {{ encuentro.refEvento }}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a href="{{ path('encuentro_eliminar', { 'id' : encuentro.id }) }}" class="btn btn-sm btn-danger del-link">ELIMINAR</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('encuentro_editar', { 'id' : encuentro.id }) }}" class="btn text-white btn-primary">EDITAR</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-lg-3 col-12"><label>Ref. Evento</label><p>{{ encuentro.refEvento }}</p></div>
+                            <div class="col-lg-6 col-12"><label>Nombre</label><p>{{ encuentro.nombre }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Estado</label><p>{{ encuentro.estado }}</p></div>
+
+                            <div class="col-lg-3 col-12"><label>Tipo de encuentro</label><p>{{ encuentro.tipoEncuentro.nombre }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Fecha de evento</label><p>{{ encuentro.fechaEvento | date('d-m-Y') }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Hora inicio</label><p>{{ encuentro.hora | date('h:i:s a') }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Hora fin</label><p>{{ encuentro.horaFin | date('h:i:s a') }}</p></div>
+
+                            <div class="col-lg-6 col-12"><label>Lugar</label><p>{{ encuentro.lugar }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Dirige encuentro</label><p>{{ encuentro.dirigeEncuentro }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Deben asistir (Cantidad)</label><p>{{ encuentro.cantidadTrabajadores }}</p></div>
+
+                            <div class="col-lg-12 col-12"><label>Descripción</label><p>{{ encuentro.descripcion }}</p></div>
+
+                            <div class="col-lg-12 col-12"></div>
+                        </div>
+
+                        <div>
+                            <div>
+                                <h2>Participantes</h2>
+                            </div>
+                            <div class="x_content">
+                                {% if encuentro.participantes is defined and encuentro.participantes | length > 0 %}
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <th>No.</th>
+                                        <th>Nombre(s) y apellidos</th>
+                                        <th>Cargo</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for participante in encuentro.participantes %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ participante.nombreCompleto }}</td>
+                                            <td>{{ participante.cargo.nombre }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                    No hay participantes
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h2>Invitados</h2>
+                            </div>
+                            <div class="x_content">
+                                {% if encuentro.invitados is defined and encuentro.invitados | length > 0 %}
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <th>No.</th>
+                                        <th>Nombre(s) y apellidos</th>
+                                        <th>Cargo</th>
+                                        <th>Entidad</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for invitado in encuentro.invitados %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ invitado.nombre }}</td>
+                                            <td>{{ invitado.cargo }}</td>
+                                            <td>{{ invitado.entidad }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                    No hay invitados
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Nuevos acuerdos</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a href="{{ path('acuerdo_nuevos', { 'idEncuentro' : encuentro.id }) }}" class="btn text-white btn-secondary">AÑADIR ACUERDOS</a>
+                </li>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            {% if acuerdosNuevos is defined and acuerdosNuevos | length > 0 %}
+                <table class="table table-sm table-bordered">
+                    <thead>
+                    <th>No. Acuerdo</th>
+                    <th>Descripción</th>
+                    <th>Personas asociadas</th>
+                    <th>F. Inicio.</th>
+                    <th>F. Cumplim.</th>
+                    <th>Estado</th>
+                    </thead>
+                    <tbody>
+
+                    {% for acuerdo in acuerdosNuevos %}
+                        {% set acuerdoTrazabilidad =
+                            acuerdo.encuentroAcuerdoTrazabilidads | filter(a => a.acuerdo.encuentro == encuentro and a.encuentroModificador == null) | sort((a, b) => a.fechaRevision > b.fechaRevision)|first
+                        %}
+                        <tr>
+                            <td>{{ acuerdo.noAcuerdo }}</td>
+                            <td>{{ acuerdo.descripcion }}</td>
+                            <td>
+                                <ul>
+                                    {% for item in acuerdo.encuentroAcuerdoPersonaAsociadas %}
+                                        <li>{% if item.responsable %} <b>(R)</b> {% endif %} {{ item.persona.nombresApellidos }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ acuerdo.fechaInicio?acuerdo.fechaInicio | date('d-m-Y'):'' }}</td>
+                            <td>
+                                {% if acuerdo.periodicidad != 'No' %}
+                                    {{ acuerdo.periodicidad }}
+                                    <p style="font-style: italic;">
+                                        {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                            (
+                                            {{ acuerdoTrazabilidad.fechaRevision | date('d-m-Y')}}
+                                            )
+                                            {% else %}
+                                            -
+                                        {% endif %}
+                                    </p>
+                                {% else %}
+                                    {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                        {{ acuerdoTrazabilidad.fechaRevision | date('d-m-Y')}}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                    {{ acuerdoTrazabilidad.estado}}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                No hay acuerdos registrados
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Acuerdos por chequear <i>hasta el {{ encuentro.fechaEvento | date('d-m-Y') }}</i></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a href="{{ path('encuentro_mostrar_chequeo_acuerdos', { 'id' : encuentro.id }) }}" class="btn text-white btn-primary">CHEQUEAR ACUERDOS</a>
+                </li>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            {% if acuerdosRevisar is defined and acuerdosRevisar | length > 0 %}
+                <table class="table table-sm table-bordered">
+                    <thead>
+                    <th>No. Acuerdo</th>
+                    <th>Descripción</th>
+                    <th>Personas asociadas</th>
+                    <th>F. Inicio.</th>
+                    <th>F. Cumplim.</th>
+                    <th>Estado</th>
+                    </thead>
+                    <tbody>
+
+                    {% for acuerdo in acuerdosRevisar %}
+                        {% set acuerdoTrazabilidad =
+                            acuerdo.encuentroAcuerdoTrazabilidads | filter(a => a.estado == 'En tiempo' and a.activo == true) | sort((a, b) => a.fechaRevision > b.fechaRevision)|first
+                        %}
+                        <tr>
+                            <td>{{ acuerdo.noAcuerdo }}</td>
+                            <td>{{ acuerdo.descripcion }}</td>
+                            <td>
+                                <ul>
+                                    {% for item in acuerdo.encuentroAcuerdoPersonaAsociadas %}
+                                        <li>{% if item.responsable %} <b>(R)</b> {% endif %} {{ item.persona.nombresApellidos }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ acuerdo.fechaInicio?acuerdo.fechaInicio | date('d-m-Y'):'' }}</td>
+                            <td>
+                                {% if acuerdo.periodicidad != 'No' %}
+                                    {{ acuerdo.periodicidad }}
+                                    <p style="font-style: italic;">
+                                        {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                            (
+                                            {{ acuerdoTrazabilidad.fechaRevision | date('d-m-Y')}}
+                                            )
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </p>
+                                {% else %}
+                                    {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                        {{ acuerdoTrazabilidad.fechaRevision | date('d-m-Y')}}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                    {{ acuerdoTrazabilidad.estado}}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                No hay acuerdos registrados
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Acuerdos chequeados</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            {% if acuerdosRevisados is defined and acuerdosRevisados | length > 0 %}
+                <table class="table table-sm table-bordered">
+                    <thead>
+                    <th>No. Acuerdo</th>
+                    <th>Descripción</th>
+                    <th>Personas asociadas</th>
+                    <th>F. Inicio.</th>
+                    <th>F. Cumplim.</th>
+                    <th>Estado</th>
+                    </thead>
+                    <tbody>
+
+                    {% for acuerdo in acuerdosRevisados %}
+                        {% set acuerdoTrazabilidad =
+                            acuerdo.encuentroAcuerdoTrazabilidads | filter(a => a.encuentroModificador == encuentro and a.activo == false) | sort((a, b) => a.fechaRevision > b.fechaRevision)|first
+                        %}
+                        <tr>
+                            <td>{{ acuerdo.noAcuerdo }}</td>
+                            <td>{{ acuerdo.descripcion }}</td>
+                            <td>
+                                <ul>
+                                    {% for item in acuerdo.encuentroAcuerdoPersonaAsociadas %}
+                                        <li>{% if item.responsable %} <b>(R)</b> {% endif %} {{ item.persona.nombresApellidos }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ acuerdo.fechaInicio?acuerdo.fechaInicio | date('d-m-Y'):'' }}</td>
+                            <td>
+                                {% if acuerdo.periodicidad != 'No' %}
+                                    {{ acuerdo.periodicidad }}
+                                    <p style="font-style: italic;">
+                                        {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                            (
+                                            {{ acuerdoTrazabilidad.fechaRevision | date('d-m-Y')}}
+                                            )
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </p>
+                                {% else %}
+                                    {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                        {{ acuerdoTrazabilidad.fechaRevision | date('d-m-Y')}}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                {% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+                                    {{ acuerdoTrazabilidad.estado}}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                No hay acuerdos registrados
+            {% endif %}
+        </div>
+    </div>
+    {% include 'default/tpl-documentos.html.twig' with { 'fileDocumentos' : encuentro.fileDocumentos } %}
+
+    {% set entidad = {'nombre' : 'encuentro', 'id' : encuentro.id } %}
+
+    {% include 'default/tpl-comentarios.html.twig' with { 'entidad' : entidad } %}
+        </div>
+
+    </div>
+
+
+{% endblock %}
+

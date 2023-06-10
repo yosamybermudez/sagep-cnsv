@@ -1,0 +1,23 @@
+<table id="example" class="display table table-striped table-bordered">
+	<thead>
+		<th>Fecha y hora</th>
+		<th>Nombre</th>
+		<th>Tipo</th>
+		<th>Dirige</th>
+		<th>Asistencia</th>
+	</thead>
+	<tbody>
+		{% for encuentro in encuentros  %}
+			<tr>
+
+				<td>{{ encuentro.fechaEvento | date('d/m/Y') }} {{ encuentro.hora | date('h:i:s a') }}</td>
+				<td>{{ encuentro.nombre }}</td>
+				<td>{{ encuentro.tipoEncuentro.nombre }}</td>
+				<td>{{ encuentro.dirigeEncuentro }}</td>
+				{% set asistencia = encuentro.invitados | length + encuentro.participantes | length %}
+				{% set porciento = asistencia / encuentro.cantidadTrabajadores * 100 %}
+				<td>{{ asistencia }} / {{ encuentro.cantidadTrabajadores }} ({{ porciento | number_format(2,'.') }} %)</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

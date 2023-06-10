@@ -1,0 +1,57 @@
+<table id="example" class="display table table-striped table-bordered">
+	<thead>
+		<th>No. Acuerdo</th>
+		<th>Descripción</th>
+		<th>Personas asociadas</th>
+		<th>F. Cumplim.</th>
+		<th>Periodicidad</th>
+		<th>Estado</th>
+		<th>Cambiar estado</th>
+	</thead>
+	<tbody>
+	{% for acuerdo in acuerdos  %}
+		{% set acuerdoTrazabilidad =
+			acuerdo.encuentroAcuerdoTrazabilidads
+		%}
+		<tr>
+			<td>{{ acuerdo.noAcuerdo }}</td>
+			<td>{{ acuerdo.descripcion }}</td>
+			<td>
+				<ul>
+					{% for item in acuerdo.encuentroAcuerdoPersonaAsociadas %}
+						<li>{% if item.responsable %} <b>(R)</b> {% endif %} {{ item.persona.nombresApellidos }}</li>
+					{% endfor %}
+				</ul>
+			</td>
+			<td>
+				{% if acuerdoTrazabilidad != null or acuerdoTrazabilidad != false %}
+					{{ acuerdoTrazabilidad|length>0?acuerdoTrazabilidad[0].fechaRevision?acuerdoTrazabilidad[0].fechaRevision | date('d-m-Y'):'':''}}
+				{% else %}
+					-
+				{% endif %}
+			</td>
+			<td>{{ acuerdo.periodicidad }}</td>
+			<td>{{ acuerdoTrazabilidad|length>0?acuerdoTrazabilidad[0].estado:''}}</td>
+			<td>
+				<form class="form-inline" name="form-{{ acuerdo.id }}">
+					<div class="form-row">
+						<div class="col">
+							<select name="select-estado-{{ acuerdo.id }}" class="form-control form-control-sm">
+								{% for choice in acuerdoEstados %}
+									<option value="{{ choice }}" {% if acuerdoTrazabilidad|length>0 and acuerdoTrazabilidad[0].estado == choice %}selected="selected"{% endif %}>{{ choice }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col">
+							<button href="{{ path('acuerdo_cambiar_estado', {'id' : acuerdo.id })  }}" name="button-estado-{{ acuerdo.id }}" class="btn btn-primary btn-sm cambiar-estado-acuerdo">
+								<i class="fa fa-refresh"></i>
+							</button>
+						</div>
+
+					</div>
+				</form>
+			</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>

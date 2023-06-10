@@ -1,0 +1,86 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Lista de encuentros
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{ path('encuentro_nuevo') }}" class="btn text-white btn-primary">AÑADIR</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<form action="{{ path('encuentro_accion_grupal') }}" id="grpaction" method="post" name="grpaction">
+								<div class="form-group form-inline">
+									<select class="form-control" name="action" required id="action_select">
+										<option value="">
+											Acción de grupo</option>
+										<option value="Exportar">
+											Exportar</option>
+										<option value="Eliminar">
+											Eliminar</option>
+									</select>
+									<button class="btn btn-primary" type="submit"><span class="fa fa-arrow-right"></span> </button>
+								</div>
+							</form>
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+								<th><input type="checkbox" id="select_all" name="select_all"></th>
+								<th>Fecha y hora</th>
+								<th>Nombre</th>
+								<th>Tipo</th>
+								<th>Estado</th>
+								<th>Dirige</th>
+								<th>Asistencia</th>
+								<th>No. Ac.</th>
+								<th data-sortable="false">Opciones</th>
+								</thead>
+								<tbody>
+								{% for encuentro in encuentros  %}
+									<tr>
+										<td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ encuentro.id }}"></td>
+										<td data-order="{{ encuentro.fechaEvento | date('YmdHis') }}">{{ encuentro.fechaEvento | date('d-m-Y') }} {{ encuentro.hora | date('h:i:s a') }}</td>
+										<td>{{ encuentro.nombre }}</td>
+										<td>{{ encuentro.tipoEncuentro.nombre }}</td>
+										<td>{{ encuentro.estado }}</td>
+										<td>{{ encuentro.dirigeEncuentro }}</td>
+										{% set asistencia = encuentro.invitados | length + encuentro.participantes | length %}
+										{% set porciento = asistencia / encuentro.cantidadTrabajadores * 100 %}
+										<td>{{ asistencia }} / {{ encuentro.cantidadTrabajadores }} ({{ porciento | number_format(2,'.') }} %)</td>
+										<td>{{ encuentro.encuentroAcuerdos | length }}</td>
+										<td>
+											<a class="btn btn-xs btn-warning" href="{{ path('encuentro_mostrar',{"id":encuentro.id}) }}">
+												<i class="fa fa-eye"></i>
+											</a>
+											<a class="btn btn-xs btn-primary" href="{{ path('encuentro_editar',{"id":encuentro.id}) }}">
+												<i class="fa fa-edit"></i>
+											</a>
+											<a class="btn btn-xs btn-danger del-link" href="{{ path('encuentro_eliminar', {'id': encuentro.id}) }}">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

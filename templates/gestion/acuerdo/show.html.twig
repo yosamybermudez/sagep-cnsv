@@ -1,0 +1,81 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('acuerdo_listar') }}"><i class="fa fa-caret-left"></i> Volver a Lista de acuerdos</a></h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel x_panel_cnsv">
+                    <div class="x_title">
+                        <h2>Acuerdo: {{ acuerdo.noAcuerdo }}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a href="{{ path('acuerdo_editar', { 'id' : acuerdo.id }) }}" class="btn text-white btn-primary">EDITAR</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('acuerdo_nuevos', { 'idEncuentro' : 0 }) }}" class="btn text-white btn-secondary">AÑADIR ACUERDO</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div>
+                                {% set acuerdoTrazabilidad =
+                                    acuerdo.encuentroAcuerdoTrazabilidads
+                                %}
+                                <div class="col-lg-4 col-12"><label>No. Acuerdo:</label> {{ acuerdo.noAcuerdo }}</div>
+                                <div class="col-lg-4 col-12"><label>Estado:</label> {{ acuerdoTrazabilidad|length>0?acuerdoTrazabilidad[0].estado:'' }}</div>
+                                <div class="col-lg-12 col-12"><label>Descripción:</label> {{ acuerdo.descripcion }}</div>
+                                <div class="col-lg-4 col-12"><label>Personas asociadas</label><ul class="m-0 mb-2">{% for item in acuerdo.encuentroAcuerdoPersonaAsociadas %}<li>{% if item.responsable %} <b>(R)</b> {% endif %} {{ item.persona.nombresApellidos }} <i>({{ item.persona.cargo }} - {{ item.persona.entidad }})</i></li>{% endfor %}</ul></div>
+                                <div class="col-lg-4 col-12"><label>Fecha de inicio</label><p class="m-0">{{ acuerdo.fechaInicio ? acuerdo.fechaInicio | date('d-m-Y'):''}}</p></div>
+                                <div class="col-lg-4 col-12"><label>Fecha de cumplimiento</label><p class="m-0">{{ acuerdoTrazabilidad|length>0?acuerdoTrazabilidad[0].fechaRevision|date('d-m-Y'):'' }}</p></div>
+                            </div>
+                            <div class="ln_solid m-3"></div>
+                       </div>
+                    </div>
+                </div>
+                <div class="x_panel x_panel_cnsv">
+                    <div class="x_title">
+                        <h2>Datos del encuentro</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a href="{{ path('encuentro_editar', { 'id' : acuerdo.encuentro.id }) }}" class="btn text-white btn-primary">EDITAR</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('encuentro_mostrar', { 'id' : acuerdo.encuentro.id }) }}" class="btn text-white btn-secondary">VER ENCUENTRO</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                        <div class="x_content">
+                            <div class="row">
+                                <div>
+                                    <div class="col-lg-4  col-12"><label>Ref. Evento</label><p><a href="{{ path('encuentro_mostrar', {'id': acuerdo.encuentro.id}) }}"> {{ acuerdo.encuentro.refEvento }}</a></p></div>
+                                        <div class="col-lg-8 col-12"><label>Nombre</label><p>{{ acuerdo.encuentro.nombre }}</p></div>
+                                        <div class="col-lg-4 col-12"><label>Estado</label><p>{{ acuerdo.encuentro.estado }}</p></div>
+                                        <div class="col-lg-4 col-12"><label>Tipo de encuentro</label><p>{{ acuerdo.encuentro.tipoEncuentro.nombre }}</p></div>
+                                        <div class="col-lg-4 col-12"><label>Fecha de evento</label><p>{{ acuerdo.encuentro.fechaEvento | date('d-m-Y') }}</p></div>
+                                        <div class="col-lg-4 col-12"><label>Hora inicio</label><p>{{ acuerdo.encuentro.hora | date('h:i:s a') }}</p></div>
+                                        <div class="col-lg-4 col-12"><label>Hora fin</label><p>{{ acuerdo.encuentro.horaFin | date('h:i:s a') }}</p></div>
+                                        <div class="col-lg-4 col-12"><label>Lugar</label><p>{{ acuerdo.encuentro.lugar }}</p></div>
+                                        <div class="col-lg-4 col-12"><label>Dirige encuentro</label><p>{{ acuerdo.encuentro.dirigeEncuentro }}</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

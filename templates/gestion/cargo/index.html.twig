@@ -1,0 +1,70 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Lista de cargos
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{ path('cargo_nuevo') }}" class="btn text-white btn-primary">AÑADIR</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<form action="{{ path('cargo_accion_grupal') }}" id="grpaction" method="post" name="grpaction">
+								<div class="form-group form-inline">
+									<select class="form-control" name="action" required id="action_select">
+										<option value="">
+											Acción de grupo</option>
+										<option value="Eliminar">
+											Eliminar</option>
+									</select>
+									<button class="btn btn-primary" type="submit"><span class="fa fa-arrow-right"></span> </button>
+								</div>
+							</form>
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th><input type="checkbox" id="select_all" name="select_all"></th>
+									<th>Cargo</th>
+									<th>Rol del sistema</th>
+									<th data-sortable="false">Opciones</th>
+								</thead>
+								<tbody>
+									{% for cargo in cargos  %}
+										<tr>
+											<td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ cargo.id }}"></td>
+											<td>{{ cargo.nombre }}</td>
+											<td>{{ cargo.rolSistema is not null ? cargo.rolSistema.nombre : 'N/E'}}</td>
+											<td>
+												<a class="btn btn-sm btn-primary" href="{{ path('cargo_editar',{"id":cargo.id}) }}">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a href="{{ path('cargo_eliminar', {'id': cargo.id}) }}" class="btn btn-sm btn-danger disable-btn del-link">
+													<i class="fa fa-trash"></i>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

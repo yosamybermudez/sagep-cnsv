@@ -1,0 +1,144 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('encuentro_listar') }}"><i class="fa fa-caret-left"></i> Volver a la información del Encuentro</a></h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel x_panel_cnsv">
+                    <div class="x_title">
+                        <h2>Chequeo de acuerdos del Encuentro: {{ encuentro.refEvento }}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a href="{{ path('encuentro_mostrar_confirmar_cambios', { 'id' : encuentro.id }) }}" class="btn btn-sm btn-primary">ACEPTAR CAMBIOS</a>
+                            </li>
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-lg-3 col-12"><label>Ref. Evento</label><p>{{ encuentro.refEvento }}</p></div>
+                            <div class="col-lg-6 col-12"><label>Nombre</label><p>{{ encuentro.nombre }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Estado</label><p>{{ encuentro.estado }}</p></div>
+
+                            <div class="col-lg-3 col-12"><label>Tipo de encuentro</label><p>{{ encuentro.tipoEncuentro.nombre }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Fecha de evento</label><p>{{ encuentro.fechaEvento | date('d-m-Y') }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Hora inicio</label><p>{{ encuentro.hora | date('h:i:s a') }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Hora fin</label><p>{{ encuentro.horaFin | date('h:i:s a') }}</p></div>
+
+                            <div class="col-lg-6 col-12"><label>Lugar</label><p>{{ encuentro.lugar }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Dirige encuentro</label><p>{{ encuentro.dirigeEncuentro }}</p></div>
+                            <div class="col-lg-3 col-12"><label>Deben asistir (Cantidad)</label><p>{{ encuentro.cantidadTrabajadores }}</p></div>
+
+                            <div class="col-lg-12 col-12"><label>Descripción</label><p>{{ encuentro.descripcion }}</p></div>
+
+                            <div class="col-lg-12 col-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                <div class="x_title">
+                    <h2>Acuerdos a revisar</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                {% if acuerdosRevisar is defined and acuerdosRevisar | length > 0 %}
+                    {% for acuerdo in acuerdosRevisar %}
+                        {% set acuerdoTrazabilidad =
+                            acuerdo.encuentroAcuerdoTrazabilidads | filter(a => a.estado == 'En tiempo' and a.activo == true) | sort((a, b) => a.fechaRevision > b.fechaRevision)|first
+                        %}
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel x_panel_cnsv">
+                            <div class="x_title">
+                                {{ acuerdo.noAcuerdo }}
+                            </div>
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-12"><label>Descripción</label><p>{{ acuerdo.descripcion }}</p></div>
+                                    <div class="col-lg-3 col-12"><label>Periodicidad</label><p>{{ acuerdo.periodicidad }}</p></div>
+                                    <div class="col-lg-3 col-12"><label>Fecha en que se toma</label><p>{{ acuerdo.fechaInicio | date('d-m-Y') }}</p></div>
+
+                                    <div class="col-lg-3 col-12 acuerdo-fecha-cumplimiento"><label>Fecha de cumplimiento</label><p>{{ acuerdoTrazabilidad ? acuerdoTrazabilidad.fechaRevision | date('d-m-Y') ?: '' }}</p></div>
+                                    <div class="col-lg-3 col-12 acuerdo-estado"><label>Estado actual</label><p>{{ acuerdoTrazabilidad ? acuerdoTrazabilidad.estado ?: '' }}</p></div>
+                                    <div class="col-lg-3 col-12 acuerdo-observaciones"><label>Observaciones</label><p>{{ acuerdoTrazabilidad ? acuerdoTrazabilidad.observaciones ?: '-' }}</p></div>
+                                    <div class="col-lg-12 col-12"><label>Personas asociadas</label>
+                                        {% for item in acuerdo.encuentroAcuerdoPersonaAsociadas %}
+                                            <li>{% if item.responsable %} <b>(R)</b> {% endif %} {{ item.persona.nombresApellidos }}</li>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-lg-12 col-12 mt-3">
+                                            <div class="form-group">
+                                                <label for="acuerdo_observaciones_{{ acuerdo.id }}">Observaciones</label>
+                                                <textarea id="acuerdo_observaciones_{{ acuerdo.id }}" required="required" name="acuerdo[{{ acuerdo.id }}][observaciones]" class="form-control form-control-sm"></textarea>
+                                            </div>
+                                            <div class="input-group">
+                                                <select class="form-control form-control-sm acuerdo-select-estado" name="acuerdo[{{ acuerdo.id }}][estado]">
+                                                    <option value="Cumplido">Cumplido</option>
+                                                    <option value="Cumplido en parte">Cumplido en parte</option>
+                                                    <option value="Pospuesto">Pospuesto</option>
+                                                    {% if acuerdo.periodicidad != 'No' %}
+                                                        <option value="Cumplido y finalizar">Cumplido y finalizar</option>
+                                                    {% endif %}
+                                                    <option value="Incumplido y finalizar">Incumplido y finalizar</option>
+                                                    <option value="Incumplido y replanificar">Incumplido y replanificar</option>
+                                                    <option value="Cancelado">Cancelado</option>
+
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <input type="hidden" value="{{ encuentro.id }}" class="acuerdo-encuentro-id">
+                                                    <button class="btn btn-sm btn-primary acuerdo-cambiar-estado" href="{{ path('acuerdo_cambiar_estado', {'id' : acuerdo.id}) }}">Cambiar estado <i class="fa fa-arrow-right"></i></button>
+                                                </span>
+                                            </div>
+                                            <div class="form-group"><label for="acuerdo_fecha_planificada_{{ acuerdo.id }}" class="required">Fecha de planificación</label>
+                                                <input type="date" id="acuerdo_fecha_planificada_{{ acuerdo.id }}" disabled="disabled" name="acuerdo[{{ acuerdo.id }}][fecha_planificada]" class="form-control form-control-sm nueva-fecha"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    No hay acuerdos a revisar para este encuentro
+                {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="x_panel x_panel_cnsv">
+            <div class="overflow-hidden">
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a href="{{ path('encuentro_mostrar_confirmar_cambios', { 'id' : encuentro.id }) }}" class="btn btn-sm btn-primary m-0">ACEPTAR CAMBIOS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+

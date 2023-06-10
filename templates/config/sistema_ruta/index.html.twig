@@ -1,0 +1,54 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Rutas
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							Lista de rutas</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{ path('sistema_ruta_nuevo') }}" class="btn text-white btn-primary">AÑADIR</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th>No.</th>
+									<th>Nombre</th>
+									<th>Identificador</th>
+									<th data-orderable="false"></th>
+								</thead>
+								<tbody>
+									{% for ruta in sistema_rutas  %}
+										<tr>
+											<td>{{ loop.index }}</td>
+											<td>{{ruta.nombre }}</td>
+											<td>{{ruta.enlace }}</td>
+											<td><a href="{{ ruta.enlace is not null ? path(ruta.enlace) : '#' }}" class="btn btn-sm btn-success"><i class="fa fa-arrow-right"></i> </a></td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

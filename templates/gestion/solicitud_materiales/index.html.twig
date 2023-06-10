@@ -1,0 +1,86 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Lista de solicitudes de materiales
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{ path('solicitud_materiales_nuevo') }}" class="btn text-white btn-primary">AÑADIR</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<form action="{{ path('solicitud_materiales_accion_grupal') }}" id="grpaction" method="post" name="grpaction">
+								<div class="form-group form-inline">
+									<select class="form-control" name="action" required id="action_select">
+										<option value="">
+											Acción de grupo</option>
+										<option value="Eliminar">
+											Eliminar</option>
+									</select>
+									<button class="btn btn-primary" type="submit"><span class="fa fa-arrow-right"></span> </button>
+								</div>
+							</form>
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th><input type="checkbox" id="select_all" name="select_all"></th>
+									<th>No.</th>
+									<th>No. Orden</th>
+									<th>Solicitado por</th>
+									<th>F. Solicitud</th>
+									<th>Materiales</th>
+									<th data-sortable="false">Opciones</th>
+								</thead>
+								<tbody>
+									{% for solicitud in solicitudesMateriales  %}
+										<tr>
+											<td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ solicitud.id }}"></td>
+											<td>{{ solicitud.nroSolicitud }}</td>
+											<td>{{ solicitud.nroOrden }}</td>
+											<td>
+												{{ solicitud.solicitadoPorNombreCompleto }} <br> {{ solicitud.solicitadoPorCargo }}</td>
+											<td>{{ solicitud.solicitadoPorFecha | date('d-m-Y') }}</td>
+											<td>
+												{% for s in solicitud.solicitudesMaterialesProductos %}
+													<li class="ml-3">{{ s.producto.descripcion }} - {{ s.cantidad }}</li>
+												{% endfor %}
+											</td>
+											<td>
+												<a class="btn btn-sm btn-success" href="{{ path('solicitud_materiales_exportar_word',{"id":solicitud.id}) }}">
+													<i class="fa fa-download"></i>
+												</a>
+												<a class="btn btn-sm btn-warning" href="{{ path('solicitud_materiales_mostrar',{"id":solicitud.id}) }}">
+													<i class="fa fa-eye"></i>
+												</a>
+												<a class="btn btn-sm btn-primary" href="{{ path('solicitud_materiales_editar',{"id":solicitud.id}) }}">
+													<i class="fa fa-edit"></i>
+												</a>
+												<a class="btn btn-sm btn-danger disable-btn del-link" href="{{ path('solicitud_materiales_eliminar', {'id': solicitud.id}) }}">
+													<i class="fa fa-trash"></i>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

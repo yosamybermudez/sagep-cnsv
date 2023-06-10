@@ -1,0 +1,75 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Provincias
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							Lista de provincias</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{ path('provincia_nuevo') }}" class="btn text-white btn-primary">AÑADIR</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<form action="{{ path('provincia_accion_grupal') }}" id="grpaction" method="post" name="grpaction">
+								<div class="form-group form-inline">
+									<select class="form-control" name="action" required id="action_select">
+										<option value="">
+											Acción de grupo</option>
+										<option value="Eliminar">
+											Eliminar</option>
+									</select>
+									<button class="btn btn-primary" type="submit"><span class="fa fa-arrow-right"></span> </button>
+								</div>
+
+							</form>
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+								<th><input type="checkbox" id="select_all" name="select_all"></th>
+								<th>Código</th>
+								<th>Nombre</th>
+								<th>Abreviatura</th>
+								<th data-sortable="false">Opciones</th>
+								</thead>
+								<tbody>
+								{% for provincia in provincias %}
+									<tr>
+										<td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ provincia.id }}"></td>
+										<td>{{ provincia.id }}</td>
+										<td>{{ provincia.nombre }}</td>
+										<td>{{ provincia.abreviatura }}</td>
+										<td>
+											<a class="btn btn-sm btn-primary" href="{{ path('provincia_editar',{"id":provincia.id}) }}">
+												<i class="fa fa-edit"></i>
+											</a>
+											<a  class="btn btn-sm btn-danger disable-btn del-link" href="{{ path('provincia_eliminar', {'id': provincia.id}) }}">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CNSV - Inicie sesión
+{% endblock %}
+{% block stylesheets %}
+	<meta
+	http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta
+	name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/ico" />
+
+	<!-- Bootstrap -->
+	<link
+	href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link
+	href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+	<!-- NProgress -->
+	<link
+	href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+	<!-- Animate -->
+	<link
+	href="{{ asset('vendors/animate.css/animate.css') }}" rel="stylesheet">
+	<!-- iCheck -->
+	<link
+	href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+	<!-- Custom Theme Style -->
+	<link href="{{ asset('src/css/custom.min.css') }}" rel="stylesheet">
+	<!-- Personalized Theme Style -->
+	<link href="{{ asset('src/css/personalized.css') }}" rel="stylesheet">
+{% endblock %}
+{% block bodyclass %}class="login"
+{% endblock %}
+{% block body %}
+	<div>
+		<a class="hiddenanchor" id="signup"></a>
+		<a class="hiddenanchor" id="signin"></a>
+		<div class="login_wrapper">
+			<div class="animate form login_form">
+				<section class="login_content">
+					<form method="post">
+						<h1>SAGEP - CNSV</h1>
+						<h5>Sistema de Apoyo a la Gestión de los Procesos</h5>
+						<div class="clearfix"></div>
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+						<div>
+							<input type="text" value="{{ last_username }}" name="username" id="inputText" class="form-control" placeholder="Usuario" required autofocus>
+						</div>
+						<div>
+							<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						</div>
+						<div>
+							<input type="checkbox" class="mb-3" name="_remember_me"><span>¿Recordar contraseña?</span>
+						</div>
+						<div>
+							<button class="btn bg-instucional-verde submit" href="index.html">Iniciar sesión</button>
+							<a class="reset_pass" href="{{path('app_forgot_password_request')}}">¿Olvidaste tu contraseña?</a>
+						</div>
+
+						<div class="separator">
+							{# <p class="change_link">
+								{{ "backend.login.new_site"|trans }}
+								<a href="#signup" class="to_register">
+									{{ "backend.login.create_acount"|trans }}
+								</a>
+							</p> #}
+
+							<div class="clearfix"></div>
+							<br/>
+
+							<div>
+								<img src="{{ asset('images/logo.png') }}" width="300px;">
+								<h5>Comisión Nacional<br> de Seguridad Vial</h5>
+								<p>©{{ "now"|date("Y") }}
+									Todos los derechos reservados.
+									<a target="_blank" href="https://cnsv.mitrans.gob.cu/">CNSV<a/>
+								</p>
+							</div>
+						</div>
+
+
+					</form>
+				</section>
+			</div>
+			<div id="register" class="animate form registration_form">
+				<section class="login_content">
+					<form>
+						<h1>
+							Registrarse</h1>
+						<div>
+							<input type="text" class="form-control" placeholder="Usuario" required=""/>
+						</div>
+						<div>
+							<input type="email" class="form-control" placeholder="Correo electrónico" required=""/>
+						</div>
+						<div>
+							<input type="password" class="form-control" placeholder="Contraseña" required=""/>
+						</div>
+						<div>
+							<a class="btn btn-default submit" href="index.html">Iniciar sesión</a>
+						</div>
+
+						<div class="clearfix"></div>
+
+						<div class="separator">
+							<p class="change_link">¿Ya eres miembro?
+								<a href="#signin" class="to_register">
+									Iniciar sesión
+								</a>
+							</p>
+
+							<div class="clearfix"></div>
+							<br/>
+							<div>
+								<h1>
+									<i class="fa fa-paw"></i>
+									PANEL DE ADMINISTRACION</h1>
+								<p>©{{ "now"|date("Y") }}
+									Todos los derechos reservados.
+									<a target="_blank" href="//example.com">example.com<a/></p>
+								</p>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}{% endblock %}

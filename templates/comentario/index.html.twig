@@ -1,0 +1,81 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h5>
+					Lista de comentarios
+				</h5>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<ul class="nav navbar-right panel_toolbox">
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<form action="{{ path('comentario_accion_grupal') }}" id="grpaction" method="post" name="grpaction">
+								<div class="form-group form-inline">
+									<select class="form-control" name="action" required id="action_select">
+										<option value="">
+											Acción de grupo</option>
+										<option value="Eliminar">
+											Eliminar</option>
+									</select>
+									<button class="btn btn-primary" type="submit"><span class="fa fa-arrow-right"></span> </button>
+								</div>
+							</form>
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th><input type="checkbox" id="select_all" name="select_all"></th>
+									<th>Autor</th>
+									<th>Comentario</th>
+									<th>Referencia</th>
+									<th>Creado</th>
+									<th>Modificado</th>
+									<th data-sortable="false">Opciones</th>
+								</thead>
+								<tbody>
+									{% for comentario in comentarios  %}
+										<tr>
+											<td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ comentario.id }}"></td>
+											<td>{{ comentario.usuario.username }}</td>
+											<td>{{ comentario.comentario }}</td>
+											<td>
+												{% if comentario.encuentro is not null %}
+													Encuentro # {{ comentario.encuentro.id }}
+												{% elseif comentario.encuentroAcuerdo is not null %}
+													Acuerdo de encuentro # {{ comentario.encuentroAcuerdo.id }}
+												{% endif %}
+											</td>
+											<td>{{ comentario.fechaCreado | date('d/m/Y h:i:s a') }}</td>
+											<td>{{ comentario.fechaModificado | date('d/m/Y h:i:s a') }}</td>
+											<td class="opciones">
+												<a class="btn btn-xs btn-warning" href="{{ path('comentario_mostrar',{"id":comentario.id}) }}">
+													<i class="fa fa-eye"></i>
+												</a>
+												<a class="btn btn-xs btn-primary" href="{{ path('comentario_editar',{"id":comentario.id}) }}">
+													<i class="fa fa-edit"></i>
+												</a>
+												<button class="btn btn-xs btn-danger disable-btn del-link" href="{{ path('comentario_eliminar', {'id': comentario.id}) }}">
+													<i class="fa fa-trash"></i>
+												</button>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

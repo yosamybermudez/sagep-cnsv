@@ -1,0 +1,412 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+
+    {{ form_start(form) }}
+    <div>
+        <div class="toolbar align-fix" >
+            <ul class="nav nav-pills">
+                <li class="active titulo-contenido nav-pills-left">Solicitud de Materiales</li>
+            </ul>
+        </div>
+        <div id="tab1" class="tab-pane panel-accion">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row-fluid">
+                        <div class="col-lg-12"id="form_row_div">
+                            <div class="col-lg-3">{% if form.estado is defined  %}{{ form_row(form.estado,{'attr':{'class':'form-control input-sm'}}) }}{% endif %}</div>
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <span id="span_documento" class="input-group-addon">Documento</span>
+                                    {{ form_widget(form.documento,{'attr':{'class':'form-control input-sm'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">{{ form_row(form.comentario,{'attr':{'class':'form-control input-sm'}}) }}</div>
+                            <div class="col-lg-6" id="div_solicitud_materiales_motivoCancelacion">{{ form_row(form.motivoCancelacion) }}</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row-fluid">
+                        <div class=" " style="margin-top: 10px!important; margin: auto"  >
+                            <table class=MsoNormalTable style='margin: auto ;border-collapse:collapse;border:none;width: 50cm!important;'>
+                                <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:13.15pt'>
+                                    <td width="45%" colspan=8 valign=top style='width:45.16%;border:solid windowtext 1.0pt; mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.15pt'>
+                                        <p class=MsoNormal style='margin-top:1.0pt;line-height:106%;mso-pagination:  none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>UNIVERSIDAD DE LAS CIENCIAS DE LA INFORMÁTICA<o:p></o:p></span></p>
+                                    </td>
+                                    <td width="35%" colspan=8 valign=top style='width:35.64%;border-top:solid windowtext 1.0pt; border-left:none;border-bottom:none;border-right:solid windowtext 1.0pt;mso-border-left-alt:solid windowtext .75pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.15pt'>
+                                        <p class=MsoNormal align=center style='margin-top:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=FR style='font-size:8.0pt;line-height:106%;mso-ansi-language:FR'>SOLICITUD DE MATERIALES<o:p></o:p></span></b></p>
+                                    </td>
+                                    <td width="6%" colspan=6 valign=top style='width:6.6%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.15pt'>
+                                        <p class=MsoNormal align=center style='margin-top:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD class="required" style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>FECHA DE SOLICITUD<o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="5%" colspan=3 valign=top style='width:5.42%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-top-alt:.75pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:.75pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0cm 2.0pt 0cm 2.0pt;height:13.15pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='margin-top:1.0pt;margin-right:0cm;  margin-bottom:0cm;margin-left:7.75pt;margin-bottom:.0001pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>M<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="7%" valign=top style='width:7.16%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.15pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='margin-top:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>A<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                </tr>
+                                <tr style='mso-yfti-irow:1;height:13.35pt'>
+                                    <td width="23%" colspan=4 valign=top style='width:23.8%;border:solid windowtext 1.0pt;border-top:none;mso-border-top-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.35pt'>
+                                        <p class=MsoNormal style='margin-top:1.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span class="required" lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>DIRECCIÓN<span style='mso-spacerun:yes'>   </span></span><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.direccion,{'attr':{'class':'form-control input-sm'}}) }}</span></b><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><o:p></o:p></span></p>
+                                    </td>
+                                    <td width="21%" colspan=4 valign=top style='width:21.38%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.35pt'>
+                                        <p class=MsoNormal style='margin-top:1.0pt;line-height:106%;mso-pagination: none;mso-layout-grid-align:none;text-autospace:none'><span class="required" lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>CÓDIGO </span><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt; mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.codigo,{'attr':{'class':'form-control input-sm'}}) }}</span></b><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p></o:p></span></p>
+                                    </td>
+                                    <td width="35%" colspan=8 valign=top style='width:35.64%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-left-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-bottom-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.35pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-MX style='font-size:8.0pt;line-height:106%'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                    <td width="6%" colspan=6 valign=top style='width:6.6%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;  mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.35pt'>
+                                        <p class=MsoNormal align=center style='text-align:center;line-height:106%; mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt; mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.fechaSolicitud,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></b></p>
+                                    </td>
+                                    {#                                <td width="5%" colspan=3 valign=top style='width:5.42%;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;   mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;   mso-border-top-alt:.75pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:.75pt;   mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0cm 2.0pt 0cm 2.0pt;height:13.35pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;  mso-pagination:none;tab-stops:center 13.35pt;mso-layout-grid-align:none; text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>12<o:p></o:p></span></b></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="7%" valign=top style='width:7.16%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:13.35pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>2020<o:p></o:p></span></b></p>#}
+                                    {#                                </td>#}
+                                </tr>
+                                <tr style='mso-yfti-irow:2;height:17.0pt'>
+                                    <td width="80%" colspan=16 valign=top style='width:80.8%;border:solid windowtext 1.0pt;border-top:none;mso-border-top-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:17.0pt'>
+                                        <p class=MsoNormal style='margin-top:1.0pt;line-height:106%;mso-pagination: none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>ALMACÉN AL QUE SE SOLICITAN<span style='mso-spacerun:yes'>         </span></span><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ solicitud_materiale.almacen?solicitud_materiale.almacen.noAlmacenDescripcion }}</span></b><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'>     </span><b style='mso-bidi-font-weight:normal'><o:p></o:p></b></span></p>
+                                        <p class=MsoNormal style='margin-top:1.0pt;line-height:106%;mso-pagination: none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'></span><span style='mso-spacerun:yes'></span><o:p></o:p></span></p>
+                                    </td>
+                                    <td width="19%" colspan=6 valign=top style='width:19.2%;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt; mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:17.0pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align: none;text-autospace:none'><span lang=ES-TRAD  class="required" style='font-size:8.0pt; line-height:106%;mso-ansi-language:ES-TRAD'>PROCESO:</span><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt; mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'> {{ form_widget(form.proceso,{'attr':{'class':'form-control input-sm'}}) }}</span></b><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:1.0pt;line-height:106%;mso-pagination: none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                </tr>
+                                <tr style='mso-yfti-irow:3;height:58.3pt'>
+                                    <td width="2%" rowspan=2 valign=top style='width:2.26%;border:solid windowtext 1.0pt;  border-top:none;mso-border-top-alt:solid windowtext .75pt;mso-border-alt: solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:58.3pt'>
+                                        <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom: 0cm;margin-left:2.0pt;margin-bottom:.0001pt;text-align:justify;line-height:  106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>D<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:2.0pt;margin-bottom:.0001pt;text-align:justify;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>E<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:2.0pt;margin-bottom:.0001pt;text-align:justify;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>S<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:2.0pt;margin-bottom:.0001pt;text-align:justify;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>T<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:2.0pt;margin-bottom:.0001pt;text-align:justify;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>I<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:2.0pt;margin-bottom:.0001pt;text-align:justify;line-height: 106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>N<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:2.0pt;margin-bottom:.0001pt;text-align:justify;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>O<o:p></o:p></span></p>
+                                    </td>
+                                    <td width="21%" colspan=3 valign=top style='width:21.54%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:58.3pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>ORDEN DE PRODUCCIÓN No.<o:p></o:p></span></p>
+                                        <p class=MsoNormal align=center style='margin-top:2.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.ordenProduccion,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></b></p>
+                                        <p class=MsoNormal style='margin-right:80.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                    <td width="21%" colspan=4 valign=top style='width:21.38%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:58.3pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>LOTE No<o:p></o:p></span></p>
+                                        <p class=MsoNormal align=center style='margin-top:2.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.lote,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></b></p><p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align: none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                    <td width="35%" colspan=8 valign=top style='width:35.64%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:58.3pt'>
+                                        <p class=MsoNormal style='line-height:106%;background:white;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span class="required" lang=ES-TRAD style='font-size:10.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>CENTRO DE COSTO:</span></b><span lang=ES-TRAD style='font-size:10.0pt;line-height:106%;mso-ansi-language:ES-TRAD'> </span><span lang=ES style='font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;mso-ansi-language:ES;mso-fareast-language:EN-US'>{% if form.centroCosto is defined  %}{{ form_widget(form.centroCosto,{'attr':{'class':'form-control input-sm'}}) }}{% endif %}<o:p></o:p></span></p>
+                                        {#                                    <p class=MsoNormal style='line-height:106%;background:white;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:10.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>AR:</span></b><span lang=ES style='font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;mso-ansi-language:ES;mso-fareast-language:EN-US'>Direcciónde Contabilidad y planeacionEstrategica</span><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p></o:p></span></b></p>#}
+                                    </td>
+                                    <td width="19%" colspan=6 valign=top style='width:19.2%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height: 58.3pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>CÓDIGO: <o:p></o:p></span></p>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>&nbsp;</o:p></span></p>
+                                        <p class=MsoNormal align=center style='margin-top:2.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>--<o:p></o:p></span></b></p>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                </tr>
+                                <tr style='mso-yfti-irow:4;height:28.85pt'>
+                                    <td width="21%" colspan=3 valign=top style='width:21.54%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:28.85pt'>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>ORDEN DE TRABAJO No<o:p></o:p></span></p>
+                                        <p class=MsoNormal align=center style='margin-top:2.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'{{ form_widget(form.ordenTrabajo,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></b></p>
+                                    </td>
+                                    <td width="45%" colspan=9 valign=top style='width:45.26%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:28.85pt'>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>PRODUCTO CÓDIGO<o:p></o:p></span></p>
+                                        <p class=MsoNormal align=center style='margin-top:2.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.productoCodigo,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></b></p>
+                                    </td>
+                                    <td width="30%" colspan=9 valign=top style='width:30.94%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:28.85pt'>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>OTROS<o:p></o:p></span></p>
+                                        <p class=MsoNormal align=center style='margin-top:2.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.otros,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></b></p>
+                                    </td>
+                                </tr>
+                                <tr style='mso-yfti-irow:5;height:18.0pt'>
+                                    <td width="13%" colspan=20 style='width:13.76%;border:solid windowtext 1.0pt;border-top:none;mso-border-top-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.0pt'>
+                                        <p class=MsoNormal align=center style='margin-top:2.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>PRODUCTOS DEL ALMACEN {{ solicitud_materiale.almacen?solicitud_materiale.almacen.noAlmacenDescripcion|upper }}<o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="20%" colspan=7 style='width:20.36%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.0pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='margin-top:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'> <o:p>CANTIDAD </a></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    <td width="10%" colspan=2 style='width:10.6%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.0pt'>
+                                        <p class=MsoNormal align=center style='margin-top:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>CANTIDAD <a style="float: right;" id="insert_row" class="input-sm btn-default glyphicon glyphicon-plus add-another-collection-widget" data-list-selector="#materiales" onclick=""></a></o:p></span></p>
+                                    </td>
+                                </tr>
+                                <tr style='mso-yfti-irow:6;height:14.1pt'>
+                                    <td width="13%" colspan=22 valign=top style='width:13.76%;border:solid windowtext 1.0pt;border-top:none;mso-border-top-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:14.1pt'>
+                                        <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=EN-US style='font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>
+                                         <div class="materiales-usados">
+                                            <ul id="materiales" style="list-style: none;"
+                                                data-prototype="{{ form_widget(form.solicitudesMaterialesProductos.vars.prototype)|e }}"
+                                                data-widget-tags="{{ '<li></li>' | e }}"
+                                                data-widget-counter="{{ form.solicitudesMaterialesProductos|length }}"
+                                            >
+                                                {% for smp in form.solicitudesMaterialesProductos %}
+                                                    {{ form_widget(smp) }}
+                                                {% endfor %}
+                                            </ul>
+{#                                            <div class="btn-group">#}
+                                             {#                                                <button type="button" style="display: none"#}
+                                             {#                                                        class="calcular-gastos btn btn-sm btn-primary ml-2"#}
+                                             {#                                                        data-list-selector="#materiales">Calcular gasto</button>#}
+                                             {#                                            </div>#}
+                                        </div>
+                                    <o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="20%" colspan=7 valign=top style='width:20.36%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-top-alt:.75pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:.75pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0cm 2.0pt 0cm 2.0pt;height:14.1pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=EN-US style='font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>CANTIDAD<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="10%" colspan=2 valign=top style='width:10.6%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:14.1pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=EN-US style='font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>AQUI VA LA CANTIDAD <a style="float: right;" id="insert_row" class="input-sm btn-default glyphicon glyphicon-minus" href="javascript:void(0);" onclick=""></a><o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                </tr>
+                                <tr style='mso-yfti-irow:7;height:14.1pt'>
+                                    <td width="100%" colspan=22 valign=top style='width:100.0%;border:solid windowtext 1.0pt;border-top:none;mso-border-top-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:14.1pt'>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>NOTA:</span></b><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'> </span><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD style='font-size:10.0pt;mso-bidi-font-size:12.0pt;line-height:106%;font-family:"Arial",sans-serif;mso-ansi-language:ES-TRAD'>{{ form_widget(form.nota,{'attr':{'class':'form-control input-sm'}}) }}</span><span lang=EN-US style='font-size:10.0pt;line-height:106%;font-family:"Arial",sans-serif;mso-ansi-language:EN-US'><o:p></o:p></span></p>
+                                    </td>
+                                </tr>
+                                <tr style='mso-yfti-irow:8;height:80.75pt'>
+                                    <td width="33%" colspan=7 valign=top style='width:33.66%;border-top:none;border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:80.75pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>SOLICITADO/APROBADO<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=PT-BR  class="required" style='font-size:8.0pt;line-height:106%;mso-ansi-language:PT-BR'>NOMBRE<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span class=SpellE><span lang=ES-TRAD style='font-family:"Arial",sans-serif;mso-ansi-language:ES-TRAD'></span></span>{% if form.personaSolicita is defined  %}{{ form_widget(form.personaSolicita,{'attr':{'class':'form-control input-sm'}}) }}{% else %}{{ solicitud_materiale.personaSolicita?solicitud_materiale.personaSolicita.nombreApellidos }}<br>{{ solicitud_materiale.personaSolicita?solicitud_materiale.personaSolicita.cargo?solicitud_materiale.personaSolicita.cargo.cargo }}{% endif %}</p>
+                                        {#                                    <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-family:"Arial",sans-serif;mso-ansi-language:ES-TRAD'>Director deContabilidad y planeacionEstrategica<o:p></o:p></span></p>#}
+                                    </td>
+                                    <td width="29%" colspan=5 valign=top style='width:29.4%;border:none;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:80.75pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>AUTORIZADO<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD class="required" style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>NOMBRE:<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-family:"Arial",sans-serif;mso-ansi-language:ES-TRAD'>{{ form_widget(form.autorizadoPor,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-family:"Arial",sans-serif;mso-ansi-language:ES-TRAD'>{{ form_widget(form.cargoAutorizadoPor,{'attr':{'class':'form-control input-sm'}}) }}</span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><o:p></o:p></span></p>
+                                    </td>
+                                    <td width="26%" colspan=7 valign=top style='width:26.04%;border:none;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:80.75pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>RECIBIDO<o:p></o:p></span></p><p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>NOMBRE<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span class=SpellE><span lang=ES-TRAD style='font-family:"Arial",sans-serif;mso-ansi-language:ES-TRAD'>{{ form_widget(form.recibidoPor,{'attr':{'class':'form-control input-sm'}}) }}</span></span></p>
+                                        <p class=MsoNormal style='margin-top:2.0pt;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span class=SpellE><span lang=ES-TRAD style='font-family:"Arial",sans-serif;mso-ansi-language:ES-TRAD'>{{ form_widget(form.cargoRecibidoPor,{'attr':{'class':'form-control input-sm'}}) }}</span></span></p>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-MX style='font-size:8.0pt;line-height:106%'><o:p>&nbsp;</o:p></span></p>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                    <td width="10%" colspan=3 valign=top style='width:10.88%;border:none;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:80.75pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:18.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>&nbsp;</o:p></span></p>
+                                        <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:14.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>--<o:p></o:p></span></b></p>
+                                    </td>
+                                </tr>
+                                <tr style='mso-yfti-irow:9;height:15.6pt'>
+                                    <td width="22%" colspan=3 rowspan=2 valign=top style='width:22.0%;border:solid windowtext 1.0pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>FIRMA<o:p></o:p></span></p>
+                                    </td>
+                                    <td width="3%" colspan=4 style='width:3.24%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>
+                                        <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>FECHA DE SOLICITUD<o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="3%" style='width:3.62%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-top-alt:.75pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:.75pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='margin-left:4.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>M<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="4%" style='width:4.8%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>A<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    <td width="16%" colspan=2 rowspan=2 valign=top style='width:16.86%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>FIRMA<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-MX style='font-size:8.0pt;line-height:106%'><o:p>&nbsp;</o:p></span></p>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-MX style='font-size:8.0pt;line-height:106%'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                    <td width="3%" colspan="3" style='width:3.66%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>
+                                        <p class=MsoNormal align=center style='margin-left:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>FECHA DE AUTORIZADO<o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="3%" style='width:3.62%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='margin-left:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>M<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="5%" style='width:5.24%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='margin-left:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>A<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    <td width="12%" colspan=2 rowspan=2 valign=top style='width:12.22%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>FIRMA<o:p></o:p></span></p>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                    <td width="3%" colspan="5" style='width:3.48%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>
+                                        <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>FECHA DE RECIBIDO<o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="5%" colspan=2 style='width:5.34%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>M<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="5%" colspan=2 style='width:5.0%;border:solid windowtext 1.0pt;border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='margin-left:1.0pt;text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>A<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    <td width="10%" colspan=3 rowspan=2 valign=top style='width:10.88%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-left-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-bottom-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .75pt;padding:0cm 2.0pt 0cm 2.0pt;height:15.6pt'>
+                                        <p class=MsoNormal style='line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-MX style='font-size:8.0pt;line-height:106%'><o:p>&nbsp;</o:p></span></p>
+                                    </td>
+                                </tr>
+                                <tr style='mso-yfti-irow:10;mso-yfti-lastrow:yes;height:18.35pt'>
+                                    <td width="3%" colspan=4 style='width:3.24%;border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>
+                                        <p class=MsoNormal align=center style='text-align:center;line-height:106%'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.fechaFirma,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="3%" style='width:3.62%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-top-alt:.75pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:.75pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;tab-stops:center 13.35pt'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>12<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="4%" style='width:4.8%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>2020<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    <td width="3%" colspan="3" style='width:3.66%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>
+                                        <p class=MsoNormal align=center style='text-align:center;line-height:106%'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.fechaFirmaAutorizado,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="3%" style='width:3.62%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-top-alt:.75pt;mso-border-left-alt:.5pt;mso-border-bottom-alt:.75pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:solid;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;tab-stops:center 13.35pt'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>12<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="5%" style='width:5.24%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>2020<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    <td width="3%" colspan="5" style='width:3.48%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>
+                                        <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>{{ form_widget(form.fechaFirmaRecibido,{'attr':{'class':'form-control input-sm'}}) }}<o:p></o:p></span></p>
+                                    </td>
+                                    {#                                <td width="5%" colspan=2 style='width:5.34%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:solid windowtext .75pt;mso-border-right-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%;mso-pagination:none;mso-layout-grid-align:none;text-autospace:none'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>12<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                    {#                                <td width="5%" colspan=2 style='width:5.0%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .5pt;padding:0cm 2.0pt 0cm 2.0pt;height:18.35pt'>#}
+                                    {#                                    <p class=MsoNormal align=center style='text-align:center;line-height:106%'><span lang=ES-TRAD style='font-size:11.0pt;mso-bidi-font-size:8.0pt;line-height:106%;mso-ansi-language:ES-TRAD'>202<o:p></o:p></span></p>#}
+                                    {#                                </td>#}
+                                </tr>
+                                <![if !supportMisalignedColumns]>
+                                <tr height=0>
+                                    <td width=20 style='border:none'></td>
+                                    <td width=100 style='border:none'></td>
+                                    <td width=72 style='border:none'></td>
+                                    <td width=16 style='border:none'></td>
+                                    <td width=13 style='border:none'></td>
+                                    <td width=32 style='border:none'></td>
+                                    <td width=42 style='border:none'></td>
+                                    <td width=100 style='border:none'></td>
+                                    <td width=46 style='border:none'></td>
+                                    <td width=32 style='border:none'></td>
+                                    <td width=32 style='border:none'></td>
+                                    <td width=46 style='border:none'></td>
+                                    <td width=52 style='border:none'></td>
+                                    <td width=54 style='border:none'></td>
+                                    <td width=30 style='border:none'></td>
+                                    <td width=18 style='border:none'></td>
+                                    <td width=29 style='border:none'></td>
+                                    <td width=29 style='border:none'></td>
+                                    <td width=15 style='border:none'></td>
+                                    <td width=3 style='border:none'></td>
+                                    <td width=30 style='border:none'></td>
+                                    <td width=62 style='border:none'></td>
+                                </tr>
+                                <![endif]>
+                            </table>
+                            <p class=MsoNormal><span lang=ES-MX><o:p>&nbsp;</o:p></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid btn-procesar">
+                    <div class="span12">
+                        <div class="pull-right">
+                            <input type="submit" id="procesar-btn" value="Procesar" class="btn" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('assets/js/xabal/jquery.min.js')}}"></script>
+    {% set nombre_formulario='recursos_humanos_vacaciones' %}
+    {% include 'Default/JavaScriptFile.html.twig' %}
+    <script type="text/javascript">
+        window.onload=allUpdateReloj;
+        function  allUpdateReloj() {
+            mueveReloj();
+            fnUpdateEstadoSolicitudMateriales();
+            fnAddButton();
+        }
+
+        function fnAddButton() {
+            var cant = {{ cantidad_mp }};
+            if(cant < 1){
+                $('.add-another-collection-widget').css('display', 'none');
+            }
+
+        }
+        function hasDuplicates(arr){
+            return arr.some(x => arr.indexOf(x) !== arr.lastIndexOf(x));
+        }
+
+        function showAlert(text, type) {
+            $('div#error-condicionado').prepend('<div id="flash_notice_error_1"  role="alert"> <img src="/sgg_s5/public/assets/images/exclamation.png">' + text + '</div>');
+            //$('.alert').alert();
+            window.scrollTo(0,0);
+            setTimeout(function () {
+                // $('.alert').alert('close');
+                $('.alert').remove();
+            }, 3000);
+        }
+    </script>
+
+    <script>
+        $('#procesar-btn').click(function(){
+            var arr = new Array();
+            $('select.producto-select').each(function () {
+                arr.push($(this).val());
+            });
+            console.log(arr);
+            console.log(hasDuplicates(arr));
+            if(hasDuplicates(arr)){
+                showAlert('No puede especificar materiales con el mismo nombre', 'danger');
+                return false;
+            }
+        });
+        // Formulario añadir productos a la solicitd
+        $('.add-another-collection-widget').click(function () {
+            console.log('se presiono correctamente');
+            // $('.calcular-gastos').css('display', 'block');
+            var cantidad = {{ cantidad_mp }};
+            var list = $($(this).attr('data-list-selector'));
+            var counter = $('.eliminar-fila').length;
+            if(counter < cantidad){
+                var newWidget = list.attr('data-prototype');
+                newWidget = newWidget.replace(/__name__/g, counter);
+                counter++;
+                if(counter === cantidad){
+                    $(this).css('display','none');
+                } else {
+                    $(this).css('display','block');
+                }
+                list.data('widget-counter', counter);
+                var newElem = $(list.attr('data-widget-tags')).html(newWidget);
+                newElem.appendTo(list);
+            } else {
+                $(this).css('display','none');
+            }
+
+        });
+
+        $(document).on('click','.eliminar-fila',function () {
+            var counter = $('.eliminar-fila').length;
+            if(counter === 1){
+                console.log('No se puede eliminar');
+            } else {
+                console.log('se esta eliminando' + counter);
+                /* if($(this).closest('div').length === 0){
+                    // $(this).closest('fieldset.form-group').remove();
+                    // $('.calcular-gastos').remove();
+                 } else {
+                     $(this).closest('div').remove();
+                 }*/
+                $(this).closest('.material.row').remove();
+                var counter = $('.remove-btn').length;
+                var cantidad = {{ cantidad_mp }};
+                if(counter !== cantidad){
+                    $('.add-another-collection-widget').css('display','block');
+                } else {
+                    $('.add-another-collection-widget').css('display','none');
+                }
+            }
+        });
+        // Fin del formulario
+    </script>
+{% endblock %}

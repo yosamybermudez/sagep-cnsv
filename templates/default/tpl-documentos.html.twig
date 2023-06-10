@@ -1,0 +1,52 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h2>Documentos</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li>
+            </li>
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        {% if encuentro.fileDocumentos is defined and encuentro.fileDocumentos | length > 0 %}
+            <table class="table table-sm table-bordered" id="documentos-list">
+                <thead>
+                <th>No.</th>
+                <th>Fecha subido</th>
+                <th>Nombre real</th>
+                <th>Descripción</th>
+                <th>Formato</th>
+                <th>Opciones</th>
+                </thead>
+                <tbody>
+                {% for fileDocumento in encuentro.fileDocumentos %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ fileDocumento.fechaSubido | date('d-m-Y h:i:s a') }}</td>
+                        <td>{{ fileDocumento.nombreReal | split('.') [0] }}</td>
+                        <td>{{ fileDocumento.descripcion }}</td>
+                        <td><img width="20px" src="{{ asset('images/filetypes/'~ fileDocumento.nombreReal | split('.') [1] ~ '.png') }}"> {{ fileDocumento.nombreReal | split('.') [1] | upper }}</td>
+                        <td>
+                            <a href="{{ asset('assets/' ~ fileDocumento.url) }}" download="{{ fileDocumento.nombreReal }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            {% if fileDocumento.usuario.id == app.user.id or is_granted("ROLE_DIRECTOR_AREA") %}
+                                <button type="button" href="{{ path('file_documento_eliminar', {'id' : fileDocumento.id}) }}"  class="btn btn-sm btn-danger del-file-documento-list-item">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            No hay documentos registrados
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,63 @@
+{% extends "default/bars.html.twig" %}
+
+{% block contenpage %}
+    <h3 class="p-2 pt-3 mt-lg-5 font-weight-bold">Bienvenido(a):</h3>
+    <p class="p-2">
+        SAGEP es el Sistema de Apoyo a la Gestión de los Procesos, adaptado a las necesidades de la Comisión Nacional de Seguridad Vial (CNSV).
+        La herramienta apoya en la mejora de procesos que se realizan de manera manual en CNSV, mejorando el análisis y la toma de decisiones.
+    </p>
+
+
+    <div class="row">
+        <div class=" col-12">
+            <h4 class="font-weight-bold">Estadísticas generales</h4>
+        </div>
+        <div class="col-6">
+            <div class="tile_count">
+                <div class="col-lg-6  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i> Encuentros</span>
+                    <div class="count">{{ encuentros | length }}</div>
+{#                    <span class="count_bottom"><i class="green">4% </i> From last Week</span>#}
+                </div>
+                <div class="col-lg-6  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-clock-o"></i> Acuerdos</span>
+                    <div class="count">{{ acuerdos | length }}</div>
+{#                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>#}
+                </div>
+{#                <div class="col-lg-6  tile_stats_count">#}
+{#                    <span class="count_top"><i class="fa fa-user"></i> Solicitudes de materiales</span>#}
+{#                    <div class="count ">{{ solicitudes_materiales | length }}</div>#}
+{#                    <span class="count_bottom"><i class=""><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>#}
+{#                </div>#}
+{#                <div class="col-lg-6  tile_stats_count">#}
+{#                    <span class="count_top"><i class="fa fa-user"></i> Solicitudes de materiales</span>#}
+{#                    <div class="count ">{{ solicitudes_materiales | length }}</div>#}
+{#                    <span class="count_bottom"><i class=""><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>#}
+{#                </div>#}
+            </div>
+        </div>
+        <div class="col-6">
+            {{ render_chart(chartjs, {'class': 'my-chart'}) }}
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+    </div>
+
+    <div class="row" style="display: inline-block;">
+
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+
+        </div>
+        <div class="col-3">
+            {{ render_chart(chart, {'class': 'my-chart'}) }}
+        </div>
+    </div>
+
+{% endblock %}
+
+

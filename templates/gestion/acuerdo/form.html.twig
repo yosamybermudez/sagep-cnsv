@@ -1,0 +1,193 @@
+{% extends 'default/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('acuerdo_listar') }}"><i class="fa fa-caret-left"></i> Volver a Lista de acuerdos</a></h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="x_panel x_panel_cnsv">
+                    <div class="x_title">
+                        <h2>Registrar acuerdo(s)</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        {{ form_start(form) }}
+                       <div class="row">
+                           <div class="col-lg-12 col-12">
+                               <h4 class="m-0">Datos del acuerdo</h4>
+                               <div class="ln_solid m-2"></div>
+                               {% if form.encuentro is defined %}
+                                   <div class="col-lg-12 col-12">{{ form_row(form.encuentro) }}</div>
+                               {% endif %}
+                               <div class="col-lg-4 col-12">{{ form_row(form.estado) }}</div>
+                               <div class="col-lg-4 col-12">{{ form_row(form.periodicidad) }}</div>
+                               <div class="col-lg-4 col-12">{{ form_row(form.fechaCumplimiento) }}</div>
+                               <div class="col-lg-6 col-12">{{ form_row(form.descripcion) }}</div>
+                               <div class="col-lg-6 col-12">{{ form_row(form.observaciones) }}</div>
+                               <div class="col-lg-4 col-12"><div id="nota" class="mb-2 text-primary" style="font-style: italic; font-size: 90%"></div></div>
+
+                               <div class="x_panel">
+                                   <div class="x_title">
+                                       <h2>Personas vinculadas a los acuerdos</h2>
+                                       <ul class="nav navbar-right panel_toolbox">
+                                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                           </li>
+                                           <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                           </li>
+                                       </ul>
+                                       <div class="clearfix"></div>
+                                   </div>
+                                   <div class="x_content">
+                                       <table class="display table table-striped table-bordered" id="table-personas-acuerdos">
+                                           <thead>
+                                           <th>
+                                               <label for="persona_nombre">Nombre(s) y apellidos</label>
+                                               <input list="persona-list" class="form-control form-control-sm" id="persona_nombre" name="persona_nombre">
+                                               <datalist id="persona-list">
+                                                   {% for trabajador in trabajadores %}
+                                                        <option value="{{ trabajador.nombreCompleto }}">{{ trabajador.nombreCompleto }}</option>
+                                                   {% endfor %}
+                                               </datalist>
+                                           </th>
+                                           <th>
+                                               <label for="persona_externo">¿Externo?</label>
+                                               <input class="form-control form-control-sm" id="persona_externo" name="persona_externo" type="checkbox">
+                                           </th>
+                                           <th>
+                                               <label for="persona_cargo">Cargo</label>
+                                               <input class="form-control form-control-sm" id="persona_cargo" name="persona_cargo" disabled>
+                                           </th>
+                                           <th>
+                                               <label for="persona_entidad">Entidad</label>
+                                               <input class="form-control form-control-sm" id="persona_entidad" name="persona_entidad" disabled>
+                                           </th>
+                                           <th>
+                                               <label for="persona_responsable">Responsable</label>
+                                               <input class="form-control form-control-sm" id="persona_responsable" name="persona_responsable" type="checkbox">
+                                           </th>
+                                           <th>
+                                               <button id="agregar-persona-acuerdo" type="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> </button>
+                                           </th>
+                                           </thead>
+                                           <tbody>
+                                           {% if acuerdo.encuentroAcuerdoPersonaAsociadas is defined and acuerdo.encuentroAcuerdoPersonaAsociadas | length > 0 %}
+                                               {% for item in acuerdo.encuentroAcuerdoPersonaAsociadas %}
+                                                   <tr>
+                                                       <td>{{ item.persona.nombresApellidos }}</td>
+                                                       <td><div class="text-center" style="font-size: 25px;">{% if item.personaExterna == 'true'%}<span class="fa fa-check"></span>{% else %}<span class="fa fa-remove"></span>{% endif %}</div></td>
+                                                       <td>{{ item.persona.cargo }}</td>
+                                                       <td>{{ item.persona.entidad }}</td>
+                                                       <td><div class="text-center" style="font-size: 25px;">{% if item.responsable == 'true'%}<span class="fa fa-check"></span>{% else %}<span class="fa fa-remove"></span>{% endif %}</div></td>
+                                                       <td>
+                                                           <input type="hidden" name="personas_acuerdos[]" value="{{ item.persona.nombresApellidos }}***{{ item.personaExterna ? 'true' : 'false' }}***{{ item.persona.cargo }}***{{ item.persona.entidad }}***{{ item.responsable ? 'true' : 'false' }}">
+                                                           <button class="quitar-persona-acuerdo btn btn-danger btn-sm" type="button"><span class="fa fa-remove"></span></button>
+                                                       </td>
+                                                   </tr>
+                                               {% endfor %}
+                                           {% endif %}
+                                           </tbody>
+                                       </table>
+                                   </div>
+                               </div>
+
+                               <div class="item form-group">
+                                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                       {{ form_widget(form.agregar) }}
+                                   </div>
+                               </div>
+                               <div class="ln_solid"></div>
+                           </div>
+
+                          {% if (encuentro is defined and encuentro != null) or (acuerdo.encuentro is defined and acuerdo.encuentro != null)%}
+                               <div class="col-lg-12 col-12">
+                                   <h4 class="m-0">Datos del encuentro</h4>
+                                   {% if encuentro is not defined %}{% set encuentro=acuerdo.encuentro %}{% endif %}
+                                   <div class="ln_solid m-2"></div>
+                                   <div class="col-lg-4 col-12"><label>Ref. Evento</label><p><a href="{{ path('encuentro_mostrar', {'id': encuentro.id}) }}"> {{ encuentro.refEvento }}</a></p></div>
+                                   <div class="col-lg-8 col-12"><label>Nombre</label><p>{{ encuentro.nombre }}</p></div>
+                                   <div class="col-lg-4 col-12"><label>Estado</label><p>{{ encuentro.estado }}</p></div>
+                                   <div class="col-lg-4 col-12"><label>Tipo de encuentro</label><p>{{ encuentro.tipoEncuentro.nombre }}</p></div>
+                                   <div class="col-lg-4 col-12"><label>Fecha de evento</label><p>{{ encuentro.fechaEvento | date('d-m-Y') }}</p></div>
+                                   <div class="col-lg-4 col-12"><label>Hora inicio</label><p>{{ encuentro.hora | date('h:i:s a') }}</p></div>
+                                   <div class="col-lg-4 col-12"><label>Hora fin</label><p>{{ encuentro.horaFin | date('h:i:s a') }}</p></div>
+                                   <div class="col-lg-4 col-12"><label>Lugar</label><p>{{ encuentro.lugar }}</p></div>
+                                   <div class="col-lg-4 col-12"><label>Dirige encuentro</label><p>{{ encuentro.dirigeEncuentro }}</p></div>
+                               </div>
+                           {% endif %}
+                       </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                {% if (encuentro is defined and encuentro != null) or (acuerdo.encuentro is defined and acuerdo.encuentro != null)%}
+                                    <a class="btn btn-secondary btn-sm" href="{{ path('encuentro_mostrar', {'id':encuentro.id}) }}"><i class="fa fa-arrow-left"></i> Mostrar datos del encuentro</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {{ form_row(form._token) }}
+                        {{ form_end(form, {'render_rest' : false}) }}
+                    </div>
+                </div>
+            </div>
+            {% if (encuentro is defined and encuentro!=null) or (acuerdo.encuentro is defined and acuerdo.encuentro!=null)%}
+                {% if acuerdos is not defined %}{% set acuerdos = acuerdo.encuentro.encuentroAcuerdos %}{% endif %}
+                <div class="col-12">
+                    <div class="x_panel x_panel_cnsv">
+                        <div class="x_title">
+                            <h2>Acuerdos registrados</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-12">
+                                {% for acuerdo in acuerdos %}
+                                    <div class="row">
+                                        <div class="col-lg-4 col-12"><label>No. Acuerdo:</label> {{ acuerdo.noAcuerdo }}</div>
+                                        <div class="col-lg-4 col-12"><label>Estado:</label>
+                                            {{ acuerdo.ultimoEstado }}
+                                        </div>
+                                        <div class="col-lg-12 col-12"><label>Descripción:</label> {{ acuerdo.descripcion }}</div>
+
+                                        <div class="col-lg-4 col-12"><label>Personas asociadas</label><ul class="m-0 mb-2">{% for item in acuerdo.encuentroAcuerdoPersonaAsociadas %}<li>{% if item.responsable %} <b>(R)</b> {% endif %} {{ item.persona.nombresApellidos }} <i>({{ item.persona.cargo }} - {{ item.persona.entidad }})</i></li>{% endfor %}</ul></div>
+                                        <div class="col-lg-3 col-12"><label>Fecha de registro</label><p class="m-0">{{ acuerdo.fechaInicio ?acuerdo.fechaInicio | date('d-m-Y'):''}}</p></div>
+                                        <div class="col-lg-3 col-12"><label>Fecha de cumplimiento</label><p class="m-0">
+                                                {% set acuerdos_filtrados = acuerdo.encuentroAcuerdoTrazabilidads | filter(acuerdoTrazabilidad => acuerdoTrazabilidad.acuerdo.id == acuerdo.id) %}
+                                                {% if acuerdos_filtrados|length > 0 %}
+                                                    {{ acuerdos_filtrados | sort((a, b) => a.fechaRevision > b.fechaRevision)[0].fechaRevision | date('d-m-Y') ? : '-' }}
+                                                {% endif %}
+                                            </p></div>
+                                        <div class="col-lg-2 col-12"><label>Periodicidad</label><p class="m-0">{{ acuerdo.periodicidad }}</p></div>
+                                    </div>
+                                    <div class="ln_solid m-3"></div>
+                                {% else %}
+                                    Todavía no hay acuerdos registrados
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
